@@ -3,13 +3,22 @@ import {
   createHashRouter,
   Outlet
 } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 import Home from "./pages/Home";
+import LoginButton from './components/loginbutton';
+import Dash from './pages/Dash';
 
 const Layout = () => {
 
+  const { isAuthenticated } = useAuth0()
+
   return (
     <div className='text-second bg-first'>
+      { isAuthenticated ? (
         <Outlet/>
+      ): (
+        <Home/>
+      )}
     </div>
   )
 }
@@ -22,7 +31,11 @@ const router = createHashRouter([
     children:[
       {
         path: '/',
-        element: <Home/>
+        element: <Dash/>
+      },
+      {
+        path: '/login',
+        element: <LoginButton/>
       }
     ]
   }
@@ -30,7 +43,7 @@ const router = createHashRouter([
 
 export default function App(){
   return(
-    <div className="h-[600px] w-[600px]">
+    <div>
       <RouterProvider router={router}/>
     </div>
   )
