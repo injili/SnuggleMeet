@@ -1,26 +1,37 @@
-import { useState } from "react";
-import VideoRoom from "./components/VideoRoom";
+import {
+  RouterProvider,
+  createHashRouter,
+  Outlet
+} from 'react-router-dom';
+import Home from "./pages/Home";
 
-export default function App() {
-  const [joined, setJoined] = useState(false);
+const Layout = () => {
 
   return (
-    <div className="bg-red-500 h-screen w-full">
-      <h1 className="font-bold text-7xl p-8">SnuggleMeet</h1>
+    <div className='text-second bg-first'>
+        <Outlet/>
+    </div>
+  )
+}
 
-      {
-        !joined && (
-          <button onClick={() => setJoined(true)}>
-            Join Room
-          </button>
-        )
-      }
 
+const router = createHashRouter([
+  {
+    path: '/',
+    element:<Layout/>,
+    children:[
       {
-        joined && (
-          <VideoRoom/>
-        )
+        path: '/',
+        element: <Home/>
       }
+    ]
+  }
+])
+
+export default function App(){
+  return(
+    <div className="h-[600px] w-[600px]">
+      <RouterProvider router={router}/>
     </div>
   )
 }
