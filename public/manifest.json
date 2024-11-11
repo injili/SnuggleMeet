@@ -13,14 +13,5 @@
       "scripting",
       "cookies",
       "tabs"
-    ],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "content_scripts": [
-      {
-        "matches": [],
-        "js": ["contentScript.js"]
-      }
     ]
   }
