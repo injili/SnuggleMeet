@@ -16,7 +16,13 @@ export default function Login() {
     e.preventDefault();
     if (!isSigningIn) {
       setIsSigningIn(true);
-      await dosignInWithEmailAndPassword(email, password);
+      try {
+        await dosignInWithEmailAndPassword(email, password);
+      } catch (error) {
+        setErrorMessage(error.message || "nigga please");
+      } finally {
+        setIsSigningIn(false);
+      }
     }
   };
 

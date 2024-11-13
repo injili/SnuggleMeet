@@ -18,7 +18,7 @@ export default function Home() {
               width={39}
             />
             <Link to="/profile">
-              <h1 className="font-bowldy font-thin text-second tracking-wide text-3xl">
+              <h1 className="font-bowldy font-thin text-second tracking-wide text-2xl">
                 {currentUser.displayName
                   ? currentUser.displayName
                   : currentUser.email}

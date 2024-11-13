@@ -88,13 +88,6 @@ export default function Signup() {
           {isRegistering ? "Signing Up..." : "SIGN UP"}
         </button>
       </form>
-      <p className="font-alata">or</p>
-      <p className="font-alata">
-        Sign up with
-        <button className="text-forth font-semibold text-lg hover:text-third px-2">
-          google
-        </button>
-      </p>
 
       <p className="font-alata text-sm mt-4">
         Already Have an account?{" "}
