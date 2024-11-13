@@ -21,7 +21,7 @@ export default function Login() {
   };
 
   const onGoogleSignIn = (e) => {
-    e.ptreventDefault();
+    e.preventDefault();
     if (!isSigningIn) {
       setIsSigningIn(true);
       doSignInWithGoogle().catch((err) => {

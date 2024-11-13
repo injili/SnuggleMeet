@@ -1,12 +1,10 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import theLogo from "../assets/img/snuggle.png";
 import { useAuth } from "../api/context";
 import { doCreateUserWithEmailAndPassword } from "../api/auth";
 
 export default function Signup() {
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
@@ -19,7 +17,15 @@ export default function Signup() {
     e.preventDefault();
     if (!isRegistering) {
       setIsRegistering(true);
-      await doCreateUserWithEmailAndPassword(email, password);
+      try {
+        await doCreateUserWithEmailAndPassword(email, password);
+      } catch (error) {
+        setErrorMessage(
+          error.message || "An error occurred. Please try again."
+        );
+      } finally {
+        setIsRegistering(false);
+      }
     }
   };
 

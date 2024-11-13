@@ -1,9 +1,12 @@
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
+
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Room from "./pages/Room";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+
+import Authprovider from "./api/authprovider";
 
 const Layout = () => {
   return (
@@ -44,8 +47,8 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <div className="">
+    <Authprovider>
       <RouterProvider router={router} />
-    </div>
+    </Authprovider>
   );
 }
