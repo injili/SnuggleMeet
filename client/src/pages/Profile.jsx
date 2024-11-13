@@ -1,7 +1,11 @@
 import theLogo from "../assets/img/icon.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../api/context";
+import { doSignOut } from "../api/auth";
 
 export default function Profile() {
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
   return (
     <div className="min-h-screen flex flex-col gap-4 justify-center items-center text-second">
       <Link to="/home" className="absolute left-4 top-4">
@@ -14,15 +18,13 @@ export default function Profile() {
       </Link>
 
       <div className="text-center">
-        <h1 className="font-bowldy text-3xl tracking-wide font-extralight">
-          INJILI
+        <h1 className="font-bowldy text-2xl tracking-wide font-extralight">
+          {currentUser.displayName
+            ? currentUser.displayName
+            : currentUser.email}
         </h1>
-        <p className="font-alata">injiliemail@gmail.com</p>
+        <p className="font-alata">Change account password below...</p>
       </div>
-
-      <h2 className="font-bowldy tracking-wide fonr-extralight text-xl">
-        CHANGE PASSWORD
-      </h2>
 
       <form className="flex font-alata flex-col items-center justify-center gap-2 w-[200px]">
         <input
@@ -42,7 +44,14 @@ export default function Profile() {
           CHANGE
         </button>
 
-        <button className="py-1 text-second font-semibold font-alata px-4 border border-2 bg-third border-second">
+        <button
+          onClick={() => {
+            doSignOut().then(() => {
+              navigate("/");
+            });
+          }}
+          className="py-1 text-second font-semibold font-alata px-4 border border-2 bg-third border-second"
+        >
           LOG OUT
         </button>
       </div>

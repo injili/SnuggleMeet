@@ -19,7 +19,9 @@ export default function Login() {
       try {
         await dosignInWithEmailAndPassword(email, password);
       } catch (error) {
-        setErrorMessage(error.message || "nigga please");
+        if (error) {
+          setErrorMessage("nigga please");
+        }
       } finally {
         setIsSigningIn(false);
       }
@@ -50,6 +52,7 @@ export default function Login() {
       >
         <input
           type="text"
+          required
           placeholder="EMAIL"
           value={email}
           onChange={(e) => {
@@ -59,6 +62,7 @@ export default function Login() {
         />
         <input
           type="text"
+          required
           placeholder="PASSWORD"
           value={password}
           onChange={(e) => {
