@@ -44,20 +44,3 @@ export default function Home() {
         </div>
     )
 }
-// import { useState } from "react";
-// import Room from "./Room";
-    // const [joined, setJoined] = useState(false);
-
-            // {
-            //     !joined && (
-            //     <button onClick={() => setJoined(true)}>
-            //         Join Room
-            //     </button>
-            //     )
-            // }
-
-            // {
-            //     joined && (
-            //     <Room/>
-            //     )
-            // }

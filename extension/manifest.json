@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "SnuggleMeet",
+  "version": "1.0.0",
+  "description": "A simple React app as a Chrome extension",
+  "permissions": ["windows", "tabs"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "service_worker": "js/background.js"
+  }
+}

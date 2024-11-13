@@ -1,0 +1,25 @@
+.sign-up-button {
+  font-family: "Alata", serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0d0d55;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.sign-up-button:hover {
+  color: #fd98da;
+}
+
+.log-in-button {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  padding: 0.2rem 2rem;
+  font-weight: 600;
+  color: #0d0d55;
+  border: 2px solid #0d0d55;
+  background-color: #f9faf2;
+  font-family: "Alata", serif;
+}
