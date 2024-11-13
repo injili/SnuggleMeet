@@ -5,9 +5,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message === "open_login_window") {
     chrome.windows.create(
       {
-        url: "https://example.com/login",
+        url: "http://localhost:5173/",
         type: "popup",
-        width: 400,
+        width: 500,
         height: 500,
       },
       (win) => {
