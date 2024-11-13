@@ -1,7 +1,11 @@
 import theLogo from "../assets/img/icon.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../api/context";
+import { doSignOut } from "../api/auth";
 
 export default function Home() {
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
   return (
     <div className="min-h-screen">
       <div className="h-full p-8 flex flex-col gap-8 justify-center items-center">
@@ -15,12 +19,21 @@ export default function Home() {
             />
             <Link to="/profile">
               <h1 className="font-bowldy font-thin text-second tracking-wide text-3xl">
-                INJILI
+                {currentUser.displayName
+                  ? currentUser.displayName
+                  : currentUser.email}
               </h1>
             </Link>
           </div>
           <div>
-            <button className="py-1 text-second font-semibold font-alata px-4 border border-2 bg-third border-second">
+            <button
+              onClick={() => {
+                doSignOut().then(() => {
+                  navigate("/");
+                });
+              }}
+              className="py-1 text-second font-semibold font-alata px-4 border border-2 bg-third border-second"
+            >
               LOG OUT
             </button>
           </div>
