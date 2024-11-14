@@ -8,6 +8,7 @@ export default {
         second: "#0D0D55",
         third: "#F9FAF2",
         forth: "#FD98DA",
+        fifth: "#D9F203",
       },
       fontFamily: {
         bowldy: ["Bowlby One SC", "sans-serif"],

@@ -1,5 +1,5 @@
 import theLogo from "../assets/img/icon.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "../api/context";
 import { doSignOut } from "../api/auth";
 
@@ -8,6 +8,7 @@ export default function Home() {
   const { currentUser } = useAuth();
   return (
     <div className="min-h-screen">
+      {!currentUser && <Navigate to={"/"} replace={true} />}
       <div className="h-full p-8 flex flex-col gap-8 justify-center items-center">
         <div className="w-full flex justify-between items-center">
           <div className="flex gap-4 items-center">

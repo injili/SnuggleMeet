@@ -12,6 +12,10 @@ export default function Login() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  function handleClose() {
+    setErrorMessage("");
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!isSigningIn) {
@@ -19,9 +23,7 @@ export default function Login() {
       try {
         await dosignInWithEmailAndPassword(email, password);
       } catch (error) {
-        if (error) {
-          setErrorMessage("nigga please");
-        }
+        setErrorMessage(error);
       } finally {
         setIsSigningIn(false);
       }
@@ -71,7 +73,57 @@ export default function Login() {
           className="w-full py-1 px-2 border border-2 bg-third border-second"
         />
         {errorMessage && (
-          <span className="text-red-600 text-sm">{errorMessage}</span>
+          <div
+            role="alert"
+            className=" absolute border border-forth top-4 right-4 bg-second p-2"
+          >
+            <div className="flex items-center gap-4">
+              <span className="text-forth">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </span>
+
+              <div className="flex-1">
+                <p className="text-forth text-sm">
+                  Wrong login credentials. Try again
+                </p>
+              </div>
+
+              <button
+                onClick={handleClose}
+                className="text-forth transition hover:text-fifth"
+              >
+                <span className="sr-only">Dismiss popup</span>
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
         )}
 
         <button
