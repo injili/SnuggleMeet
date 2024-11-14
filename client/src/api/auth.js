@@ -5,7 +5,7 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
-  //   updatePassword,
+  updatePassword,
   //   sendEmailVerification,
   //   sendPasswordResetEmail,
 } from "firebase/auth";
@@ -33,9 +33,9 @@ export const doSignOut = () => {
 //   return sendPasswordResetEmail(auth, email);
 // };
 
-// export const doPasswordChange = (password) => {
-//   return updatePassword(auth.currentUser, password);
-// };
+export const doPasswordChange = (password) => {
+  return updatePassword(auth.currentUser, password);
+};
 
 // export const doSendEmailVerification = () => {
 //   return sendEmailVerification(auth.currentUser, {

@@ -61,7 +61,7 @@ export default function Login() {
           className="w-full py-1 px-2 border border-2 bg-third border-second"
         />
         <input
-          type="text"
+          type="password"
           required
           placeholder="PASSWORD"
           value={password}
