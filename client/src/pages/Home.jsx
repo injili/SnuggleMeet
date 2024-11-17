@@ -1,8 +1,7 @@
-import theLogo from "../assets/img/icon.png";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "../api/context";
 import { doSignOut } from "../api/auth";
-
+import theLogo from "../assets/img/icon.png";
 export default function Home() {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
