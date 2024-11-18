@@ -30,6 +30,7 @@ export default function Room() {
       // user.audioTrack.play
     }
   };
+
   const handleUserLeft = (user) => {
     setUsers((previousUsers) =>
       previousUsers.filter((u) => u.uid !== user.uid)
@@ -88,8 +89,7 @@ export default function Room() {
             </h1>
           </div>
           <div>
-            <Link to="/">
-              {" "}
+            <Link to="/home">
               <button className="text-sm text-second font-semibold font-alata px-4 border border-2 bg-third border-second">
                 LEAVE
               </button>
