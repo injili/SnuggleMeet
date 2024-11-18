@@ -2,15 +2,20 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
+const api_key = import.meta.env.VITE_API_KEY;
+const senderID = import.meta.env.VITE_SENDER_ID;
+const applicationID = import.meta.env.VITE_APP_ID;
+const measurementID = import.meta.env.VITE_MEASUREMENT_ID;
+
 // Web App's configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBoHaomXwtrwRCTtzdwYMw9dn7_DB7Gcv4",
+  apiKey: api_key,
   authDomain: "snugglemeet.firebaseapp.com",
   projectId: "snugglemeet",
   storageBucket: "snugglemeet.firebasestorage.app",
-  messagingSenderId: "961468684328",
-  appId: "1:961468684328:web:3dd650265ad1e791813d1d",
-  measurementId: "G-Z7Z24GJS8C",
+  messagingSenderId: senderID,
+  appId: applicationID,
+  measurementId: measurementID,
 };
 
 // Initialize Firebase
