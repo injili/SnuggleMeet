@@ -1,9 +1,11 @@
 import theLogo from "../assets/img/icon.png";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../api/context";
 import { useEffect, useState } from "react";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { VideoPlayer } from "../components/videoplayer";
+import { db } from "../api/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 const APP_ID = import.meta.env.VITE_APP_ID;
 const TOKEN = import.meta.env.VITE_APP_TOKEN;
@@ -15,9 +17,12 @@ const client = AgoraRTC.createClient({
 });
 
 export default function Room() {
+  const [jointime, setJointime] = useState(null);
   const [users, setUsers] = useState([]);
   const [localTracks, setLocalTracks] = useState([]);
   const { currentUser } = useAuth();
+  const conferencingCollectionRef = collection(db, "conferencing");
+  const navigate = useNavigate();
 
   const handleUserJoined = async (user, mediaType) => {
     await client.subscribe(user, mediaType);
@@ -35,6 +40,22 @@ export default function Room() {
     setUsers((previousUsers) =>
       previousUsers.filter((u) => u.uid !== user.uid)
     );
+  };
+
+  const handleLeave = async () => {
+    try {
+      const now = new Date();
+      await addDoc(conferencingCollectionRef, {
+        join: jointime,
+        leave: now,
+        username: currentUser.displayName
+          ? currentUser.displayName
+          : currentUser.email,
+      });
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -58,6 +79,9 @@ export default function Room() {
         ]);
         client.publish(tracks);
       });
+    const now = new Date();
+
+    setJointime(now);
 
     return () => {
       for (let localTrack of localTracks) {
@@ -89,11 +113,12 @@ export default function Room() {
             </h1>
           </div>
           <div>
-            <Link to="/home">
-              <button className="text-sm text-second font-semibold font-alata px-4 border border-2 bg-third border-second">
-                LEAVE
-              </button>
-            </Link>
+            <button
+              onClick={handleLeave}
+              className="text-sm text-second font-semibold font-alata px-4 border border-2 bg-third border-second"
+            >
+              LEAVE
+            </button>
           </div>
         </div>
         <div className="grid grid-cols-2 py-2 items-center w-full px-16 gap-1">
