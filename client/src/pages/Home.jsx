@@ -53,8 +53,8 @@ export default function Home() {
             ROOM B
           </button>
         </div>
-        <p className="font-alata text-sm">
-          Powered by <span className="text-forth">injili.tech</span>
+        <p className="font-alata">
+          Powered by <span className="text-forth text-xl">injili.tech</span>
         </p>
       </div>
     </div>

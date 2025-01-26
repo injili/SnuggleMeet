@@ -126,17 +126,13 @@ export default function Room() {
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-2 py-2 items-center w-full px-16 gap-1">
+        <div className="grid grid-cols-2 py-2 items-center w-full gap-2">
           {users.map((user) => (
-            <VideoPlayer
-              key={user.uid}
-              user={user}
-              className="w-[200px] h-[200px] aspect-square border-2 border-second bg-third"
-            />
+            <VideoPlayer key={user.uid} user={user} />
           ))}
         </div>
-        <p className="font-alata text-sm text-center">
-          Powered by <span className="text-forth">injili.tech</span>
+        <p className="font-alata">
+          Powered by <span className="text-xl text-forth">injili.tech</span>
         </p>
       </div>
     </div>
