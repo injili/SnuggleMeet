@@ -44,6 +44,11 @@ export default function Room() {
 
   const handleLeave = async () => {
     try {
+      localTracks.forEach((track) => {
+        track.stop();
+        track.close();
+      });
+
       const now = new Date();
       await addDoc(conferencingCollectionRef, {
         join: jointime,
