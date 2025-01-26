@@ -108,7 +108,7 @@ export default function Room() {
                 width={29}
               />
             </Link>
-            <h1 className="font-bowldy font-thin text-second tracking-wide text-xl">
+            <h1 className="font-bolanosima font-semibold font text-second tracking-wide text-xl">
               ROOM A
             </h1>
           </div>

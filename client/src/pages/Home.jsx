@@ -18,7 +18,7 @@ export default function Home() {
               width={39}
             />
             <Link to="/profile">
-              <h1 className="font-bowldy font-thin text-second tracking-wide text-2xl">
+              <h1 className="font-bolanosima font-semibold text-second tracking-wide text-2xl">
                 {currentUser.displayName
                   ? currentUser.displayName
                   : currentUser.email}
@@ -44,12 +44,12 @@ export default function Home() {
         <div className="flex items-center w-full gap-12 justify-between">
           <Link
             to="/room"
-            className="w-full font-bowldy text-4xl text-second aspect-square border-2 border-second bg-third p-2 flex justify-center"
+            className="w-full font-bolanosima font-semibold text-4xl text-second aspect-square border-2 border-second bg-third p-2 flex justify-center"
           >
             <button>ROOM A</button>
           </Link>
 
-          <button className="w-full font-bowldy text-4xl text-second aspect-square border-2 border-second bg-third p-2">
+          <button className="w-full font-bolanosima font-semibold text-4xl text-second aspect-square border-2 border-second bg-third p-2">
             ROOM B
           </button>
         </div>

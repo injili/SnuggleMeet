@@ -11,7 +11,7 @@ export default {
         fifth: "#D9F203",
       },
       fontFamily: {
-        bowldy: ["Bowlby One SC", "sans-serif"],
+        bolanosima: ["Belanosima", "serif"],
         alata: ["Alata", "sans-serif"],
       },
     },

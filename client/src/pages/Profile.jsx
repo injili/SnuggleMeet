@@ -69,7 +69,7 @@ export default function Profile() {
       </Link>
 
       <div className="text-center">
-        <h1 className="font-bowldy text-2xl tracking-wide font-extralight">
+        <h1 className="font-bolanosima font-semibold text-2xl tracking-wide font-extralight">
           {currentUser.displayName
             ? currentUser.displayName
             : currentUser.email}

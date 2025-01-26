@@ -33,7 +33,7 @@ export default function Signup() {
     <div className="min-h-screen flex flex-col gap-2 items-center justify-center">
       {userLoggedIn && <Navigate to={"/home"} replace={true} />}
       <img src={theLogo} height={120} width={120} />
-      <h1 className="font-thin font-bowldy text-3xl my-4 text-second tracking-wide">
+      <h1 className="font-semibold font-bolanosima text-3xl my-4 text-second tracking-wide">
         SIGNUP PAGE
       </h1>
       <form
