@@ -3,6 +3,14 @@ import theLogo from "../assets/img/icon.png";
 
 export default function Navigation() {
   const location = useLocation();
+
+  const checkLocation = () => {
+    if (location.pathname === "/") {
+      return <h1 className="text-2xl font-alata ">Sign In Page</h1>;
+    } else if (location.pathname === "/signup") {
+      return <h1 className="text-2xl font-alata ">Sign Up Page</h1>;
+    }
+  };
   return (
     <div className="border-third border-b-2 mx-4 flex items-center gap-4 py-4">
       <img
@@ -12,7 +20,7 @@ export default function Navigation() {
         alt="the valediktoria logo"
         className="rounded-md"
       />
-      <h1 className="text-2xl font-alata ">Sign In Page</h1>
+      {checkLocation()}
     </div>
   );
 }

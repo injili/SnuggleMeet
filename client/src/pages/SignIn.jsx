@@ -1,5 +1,4 @@
 import { Link, Navigate } from "react-router-dom";
-import theLogo from "../assets/img/valediktoria.png";
 import { doSignInWithGoogle, dosignInWithEmailAndPassword } from "../api/auth";
 import { useAuth } from "../api/context";
 import { useState } from "react";
@@ -131,7 +130,7 @@ export default function SignIn() {
         <button
           type="submit"
           disabled={isSigningIn}
-          className="py-1 text-third font-alata px-4 border border-2 bg-first border-third rounded-full w-44"
+          className="py-1 text-first font-alata px-4 bg-second rounded-full  hover:bg-third w-44"
         >
           {isSigningIn ? "Signing In..." : "Sign In"}
         </button>
@@ -143,18 +142,16 @@ export default function SignIn() {
           onClick={(e) => {
             onGoogleSignIn(e);
           }}
-          className=" border-2 py-1 border-third rounded-full text-forth  hover:text-third px-8 "
+          className="py-1 bg-second rounded-full text-first hover:bg-third px-16 "
         >
-          {isSigningIn ? "Signing In..." : "Sign In with google"}
+          {isSigningIn ? "Signing In..." : "Sign In with Google"}
         </button>
       </p>
 
       <p className="font-montserrat mt-4">
         Don&apos;t have an account?{" "}
         <Link to="/signup">
-          <button className="text-forth hover:text-third px-2 underline">
-            Sign Up
-          </button>
+          <button className="text-forth px-2 underline">Sign Up</button>
         </Link>
       </p>
     </div>
