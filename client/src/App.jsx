@@ -2,7 +2,7 @@ import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 
 import Navigation from "./components/navigation";
 import Footer from "./components/footer";
-import Login from "./pages/Login";
+import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
 import Room from "./pages/Room";
 import Signup from "./pages/Signup";
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Login />,
+        element: <SignIn />,
       },
       {
         path: "/signup",

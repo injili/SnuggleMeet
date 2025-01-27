@@ -4,7 +4,7 @@ import { doSignInWithGoogle, dosignInWithEmailAndPassword } from "../api/auth";
 import { useAuth } from "../api/context";
 import { useState } from "react";
 
-export default function Login() {
+export default function SignIn() {
   const { userLoggedIn } = useAuth();
 
   const [email, setEmail] = useState("");
@@ -42,40 +42,45 @@ export default function Login() {
   };
 
   return (
-    <div className="h-full flex flex-col gap-2 items-center justify-center">
+    <div className="h-full flex flex-col gap-2 px-4 justify-center">
       {userLoggedIn && <Navigate to={"/home"} replace={true} />}
-
+      <p
+        className="mb-4 font-montserrat
+      "
+      >
+        Welcome to Valediktoria. Log into your account here.
+      </p>
       <form
-        className="flex font-alata flex-col items-center justify-center gap-2 w-[200px]"
+        className="flex font-montserrat flex-col justify-center gap-2 w-[300px]"
         onSubmit={onSubmit}
       >
         <input
           type="text"
           required
-          placeholder="EMAIL"
+          placeholder="email address"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
-          className="w-full py-1 px-2 border border-2 bg-third border-second"
+          className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
         />
         <input
           type="password"
           required
-          placeholder="PASSWORD"
+          placeholder="password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
-          className="w-full py-1 px-2 border border-2 bg-third border-second"
+          className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
         />
         {errorMessage && (
           <div
             role="alert"
-            className=" absolute border border-forth top-4 right-4 bg-second p-2"
+            className=" absolute border border- top-4 right-4 bg-third p-2 rounded-lg"
           >
             <div className="flex items-center gap-4">
-              <span className="text-forth">
+              <span className="text-first">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -93,14 +98,14 @@ export default function Login() {
               </span>
 
               <div className="flex-1">
-                <p className="text-forth text-sm">
-                  Wrong login credentials. Try again
+                <p className="text-first font-alata text-sm">
+                  Wrong credentials. Try again
                 </p>
               </div>
 
               <button
                 onClick={handleClose}
-                className="text-forth transition hover:text-fifth"
+                className="text-first transition hover:text-second"
               >
                 <span className="sr-only">Dismiss popup</span>
 
@@ -126,29 +131,28 @@ export default function Login() {
         <button
           type="submit"
           disabled={isSigningIn}
-          className="py-1 w-full text-second font-semibold font-alata px-4 border border-2 bg-third border-second"
+          className="py-1 text-third font-alata px-4 border border-2 bg-first border-third rounded-full w-44"
         >
-          {isSigningIn ? "Logging In..." : "LOG IN"}
+          {isSigningIn ? "Signing In..." : "Sign In"}
         </button>
       </form>
-      <p className="font-alata">or</p>
+      <p className="font-montserrat">or</p>
       <p className="font-alata">
-        Log in with
         <button
           disabled={isSigningIn}
           onClick={(e) => {
             onGoogleSignIn(e);
           }}
-          className="text-forth font-semibold text-lg hover:text-third px-2"
+          className=" border-2 py-1 border-third rounded-full text-forth  hover:text-third px-8 "
         >
-          {isSigningIn ? "Signing In..." : "google"}
+          {isSigningIn ? "Signing In..." : "Sign In with google"}
         </button>
       </p>
 
-      <p className="font-alata text-sm mt-4">
+      <p className="font-montserrat mt-4">
         Don&apos;t have an account?{" "}
         <Link to="/signup">
-          <button className="text-forth font-semibold hover:text-third px-2">
+          <button className="text-forth hover:text-third px-2 underline">
             Sign Up
           </button>
         </Link>

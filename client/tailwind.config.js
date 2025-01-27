@@ -9,7 +9,7 @@ export default {
         third: "#000",
       },
       fontFamily: {
-        bolanosima: ["Belanosima", "serif"],
+        montserrat: ["Montserrat", "serif"],
         alata: ["Alata", "sans-serif"],
       },
     },
