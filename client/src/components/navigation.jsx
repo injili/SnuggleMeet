@@ -1,3 +1,12 @@
+import { useLocation } from "react-router-dom";
+import theLogo from "../assets/img/icon.png";
+
 export default function Navigation() {
-  return <div>Navigation</div>;
+  const location = useLocation();
+  return (
+    <div className="border-third border-b-2 mx-4 flex items-center gap-4 py-4">
+      <img src={theLogo} width="65" height="65" alt="the valediktoria logo" />
+      <h1>Sign In Page</h1>
+    </div>
+  );
 }

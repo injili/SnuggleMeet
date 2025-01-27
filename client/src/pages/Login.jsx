@@ -1,5 +1,5 @@
 import { Link, Navigate } from "react-router-dom";
-import theLogo from "../assets/img/snuggle.png";
+import theLogo from "../assets/img/valediktoria.png";
 import { doSignInWithGoogle, dosignInWithEmailAndPassword } from "../api/auth";
 import { useAuth } from "../api/context";
 import { useState } from "react";
@@ -44,10 +44,7 @@ export default function Login() {
   return (
     <div className="h-full flex flex-col gap-2 items-center justify-center">
       {userLoggedIn && <Navigate to={"/home"} replace={true} />}
-      <img src={theLogo} height={120} width={120} />
-      <h1 className="font-semibold font-bolanosima text-3xl my-4 text-second tracking-wide">
-        LOGIN PAGE
-      </h1>
+
       <form
         className="flex font-alata flex-col items-center justify-center gap-2 w-[200px]"
         onSubmit={onSubmit}

@@ -1,6 +1,6 @@
 import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
-import theLogo from "../assets/img/snuggle.png";
+import theLogo from "../assets/img/valediktoria.png";
 import { useAuth } from "../api/context";
 import { doCreateUserWithEmailAndPassword } from "../api/auth";
 
