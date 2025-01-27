@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "SnuggleMeet",
+  "name": "valediktoria",
   "version": "1.0.0",
-  "description": "A simple React app as a Chrome extension",
+  "description": "An application built to help people virtually collaborate in virtual rooms mimicking a virtual library",
   "permissions": ["windows", "tabs"],
   "host_permissions": ["http://*/*", "https://*/*"],
   "action": {

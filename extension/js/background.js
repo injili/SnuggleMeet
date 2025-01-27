@@ -1,7 +1,4 @@
-console.log("Background script loaded");
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  console.log("Background received message:", message);
   if (message === "open_login_window") {
     chrome.windows.create(
       {
