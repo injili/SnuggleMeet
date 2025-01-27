@@ -1,5 +1,7 @@
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom";
 
+import Navigation from "./components/navigation";
+import Footer from "./components/footer";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Room from "./pages/Room";
@@ -10,8 +12,12 @@ import Authprovider from "./api/authprovider";
 
 const Layout = () => {
   return (
-    <div className="cursor-pointer bg-first">
-      <Outlet />
+    <div className="cursor-pointer bg-first min-h-screen flex flex-col">
+      <Navigation />
+      <div className="flex-grow flex flex-col justify-center">
+        <Outlet />
+      </div>
+      <Footer />
     </div>
   );
 };
