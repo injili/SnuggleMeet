@@ -56,7 +56,7 @@ export default function SignIn() {
         <input
           type="text"
           required
-          placeholder="email address"
+          placeholder="Email Address"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
@@ -66,7 +66,7 @@ export default function SignIn() {
         <input
           type="password"
           required
-          placeholder="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
@@ -130,7 +130,7 @@ export default function SignIn() {
         <button
           type="submit"
           disabled={isSigningIn}
-          className="py-1 text-first font-alata px-4 bg-second rounded-full  hover:bg-third w-44"
+          className="py-2 text-first font-alata px-16 bg-second rounded-full text-sm hover:bg-third w-max"
         >
           {isSigningIn ? "Signing In..." : "Sign In"}
         </button>
@@ -142,7 +142,7 @@ export default function SignIn() {
           onClick={(e) => {
             onGoogleSignIn(e);
           }}
-          className="py-1 bg-second rounded-full text-first hover:bg-third px-16 "
+          className="py-2 bg-second rounded-full text-first text-sm hover:bg-third px-16 "
         >
           {isSigningIn ? "Signing In..." : "Sign In with Google"}
         </button>
@@ -151,7 +151,9 @@ export default function SignIn() {
       <p className="font-montserrat mt-4">
         Don&apos;t have an account?{" "}
         <Link to="/signup">
-          <button className="text-forth px-2 underline">Sign Up</button>
+          <button className="text-third hover:text-second px-2  underline">
+            Sign Up
+          </button>
         </Link>
       </p>
     </div>
