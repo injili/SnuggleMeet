@@ -130,7 +130,7 @@ export default function Signup() {
         </div>
 
         <input
-          type="datetime-local"
+          type="date"
           required
           value={dateOfBirth}
           onChange={(e) => {
