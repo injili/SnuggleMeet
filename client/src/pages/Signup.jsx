@@ -13,7 +13,6 @@ export default function Signup() {
   const [isRegistering, setIsRegistering] = useState(false);
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
   const { userLoggedIn } = useAuth();
 
   const onSubmit = async (e) => {
