@@ -14,6 +14,12 @@ export default function Signup() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { userLoggedIn } = useAuth();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [termsAndConditions, setTermsAndConditions] = useState(false);
+  const [privacyPolicy, setPrivacyPolicy] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();

@@ -9,7 +9,8 @@ export const createUserProfile = async (
   uname,
   dob,
   tandc,
-  ppolicy
+  ppolicy,
+  uid
 ) => {
   try {
     await addDoc(userRecordsCollectionRef, {
@@ -19,6 +20,7 @@ export const createUserProfile = async (
       dateOfBirth: dob,
       termsAndConditions: tandc,
       privacyPolicy: ppolicy,
+      userID: uid,
     });
   } catch (error) {
     console.log(error);
