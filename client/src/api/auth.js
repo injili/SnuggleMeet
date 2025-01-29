@@ -6,14 +6,25 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   updatePassword,
+  updateProfile,
   //   sendEmailVerification,
   //   sendPasswordResetEmail,
 } from "firebase/auth";
 
-export const doCreateUserWithEmailAndPassword = async (email, password) => {
-  const newUser = await createUserWithEmailAndPassword(auth, email, password);
-  console.log(newUser.user.uid);
-  return true;
+export const doCreateUserWithEmailAndPassword = async (
+  email,
+  password,
+  userName
+) => {
+  try {
+    const newUser = await createUserWithEmailAndPassword(auth, email, password);
+    updateProfile(newUser.user, {
+      displayName: userName,
+    });
+    return newUser.user.uid;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const dosignInWithEmailAndPassword = (email, password) => {

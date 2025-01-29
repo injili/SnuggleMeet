@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 const userRecordsCollectionRef = collection(db, "UserRecords");
 
@@ -16,13 +16,19 @@ export const createUserProfile = async (
     await addDoc(userRecordsCollectionRef, {
       firstName: fname,
       lastName: lname,
-      userName: uname,
       dateOfBirth: dob,
       termsAndConditions: tandc,
       privacyPolicy: ppolicy,
+      userName: uname,
       userID: uid,
     });
   } catch (error) {
     console.log(error);
   }
+};
+
+export const checkUserName = async (userName) => {
+  const q = query(userRecordsCollectionRef, where("userName", "==", userName));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.empty;
 };

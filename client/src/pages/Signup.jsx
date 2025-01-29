@@ -5,7 +5,7 @@ import {
   doSignInWithGoogle,
   doCreateUserWithEmailAndPassword,
 } from "../api/auth";
-import { createUserProfile } from "../api/userinfo";
+import { createUserProfile, checkUserName } from "../api/userinfo";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -14,19 +14,23 @@ export default function Signup() {
   const [isRegistering, setIsRegistering] = useState(false);
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [usernameError, setUsernameError] = useState(false);
   const { userLoggedIn } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userName, setUserName] = useState("");
-  const [userID, setUserID] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [termsAndConditions, setTermsAndConditions] = useState(false);
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
 
-  const onSubmit = () => {
-    const a = createUser();
+  const getMaxDate = () => {
+    const now = new Date();
+    now.setFullYear(now.getFullYear() - 13);
+    return now.toISOString().split("T")[0];
+  };
+  const onSubmit = async () => {
+    const a = await createUser();
     if (a) {
-      setUserID(a);
       createUserProfile(
         firstName,
         lastName,
@@ -34,19 +38,22 @@ export default function Signup() {
         dateOfBirth,
         termsAndConditions,
         privacyPolicy,
-        userID
+        a
       );
     } else {
       setErrorMessage("Error Signing Up, Please Try Again");
     }
   };
 
-  const createUser = async (e) => {
-    e.preventDefault();
+  const createUser = async () => {
     if (!isRegistering) {
       setIsRegistering(true);
       try {
-        const a = await doCreateUserWithEmailAndPassword(email, password);
+        const a = await doCreateUserWithEmailAndPassword(
+          email,
+          password,
+          userName
+        );
         return a;
       } catch (error) {
         setErrorMessage(
@@ -68,6 +75,11 @@ export default function Signup() {
         setErrorMessage(err);
       });
     }
+  };
+
+  const checkUsernameFunction = async (thename) => {
+    const e = await checkUserName(thename);
+    setUsernameError(!e);
   };
 
   return (
@@ -105,13 +117,20 @@ export default function Signup() {
             className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
           />
         </div>
+        {usernameError && (
+          <span className="text-red-600 text-sm">
+            This username is not available.
+          </span>
+        )}
         <div className="flex w-full gap-2 items-center justify-center">
           <input
             type="text"
             required
             value={userName}
             onChange={(e) => {
-              setUserName(e.target.value);
+              const thename = e.target.value;
+              setUserName(thename);
+              checkUsernameFunction(thename);
             }}
             placeholder="Username"
             className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
@@ -137,6 +156,7 @@ export default function Signup() {
             setDateOfBirth(e.target.value);
           }}
           placeholder="Date of Birth"
+          max={getMaxDate()}
           className="w-1/2 py-1 px-4 border border-2 bg-first border-third rounded-full"
         />
         <div className="flex w-full gap-2 items-center justify-center">
@@ -170,9 +190,10 @@ export default function Signup() {
           <label>
             <input
               type="checkbox"
-              value={termsAndConditions}
+              required
+              checked={termsAndConditions}
               onChange={(e) => {
-                setTermsAndConditions(e.target.value);
+                setTermsAndConditions(e.target.checked);
               }}
             />{" "}
             I agree to the{" "}
@@ -184,9 +205,10 @@ export default function Signup() {
           <label>
             <input
               type="checkbox"
-              value={privacyPolicy}
+              required
+              checked={privacyPolicy}
               onChange={(e) => {
-                setPrivacyPolicy(e.target.value);
+                setPrivacyPolicy(e.target.checked);
               }}
             />{" "}
             I agree to the{" "}
