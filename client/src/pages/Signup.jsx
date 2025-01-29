@@ -28,10 +28,9 @@ export default function Signup() {
     now.setFullYear(now.getFullYear() - 13);
     return now.toISOString().split("T")[0];
   };
-  const onSubmit = async () => {
-    const a = await createUser();
-    if (a) {
-      createUserProfile(
+  const profileDetails = async (a) => {
+    try {
+      await createUserProfile(
         firstName,
         lastName,
         userName,
@@ -40,12 +39,13 @@ export default function Signup() {
         privacyPolicy,
         a
       );
-    } else {
-      setErrorMessage("Error Signing Up, Please Try Again");
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const createUser = async () => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
     if (!isRegistering) {
       setIsRegistering(true);
       try {
@@ -54,12 +54,11 @@ export default function Signup() {
           password,
           userName
         );
-        return a;
+        profileDetails(a);
       } catch (error) {
         setErrorMessage(
           error.message || "An error occurred. Please try again."
         );
-        return null;
       } finally {
         setIsRegistering(false);
       }
