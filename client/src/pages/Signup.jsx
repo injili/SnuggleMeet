@@ -5,6 +5,7 @@ import {
   doSignInWithGoogle,
   doCreateUserWithEmailAndPassword,
 } from "../api/auth";
+import { createUserProfile } from "../api/userinfo";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -17,20 +18,41 @@ export default function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userName, setUserName] = useState("");
+  const [userID, setUserID] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [termsAndConditions, setTermsAndConditions] = useState(false);
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
 
-  const onSubmit = async (e) => {
+  const onSubmit = () => {
+    const a = createUser();
+    if (a) {
+      setUserID(a);
+      createUserProfile(
+        firstName,
+        lastName,
+        userName,
+        dateOfBirth,
+        termsAndConditions,
+        privacyPolicy,
+        userID
+      );
+    } else {
+      setErrorMessage("Error Signing Up, Please Try Again");
+    }
+  };
+
+  const createUser = async (e) => {
     e.preventDefault();
     if (!isRegistering) {
       setIsRegistering(true);
       try {
-        await doCreateUserWithEmailAndPassword(email, password);
+        const a = await doCreateUserWithEmailAndPassword(email, password);
+        return a;
       } catch (error) {
         setErrorMessage(
           error.message || "An error occurred. Please try again."
         );
+        return null;
       } finally {
         setIsRegistering(false);
       }
@@ -65,12 +87,20 @@ export default function Signup() {
           <input
             type="text"
             required
+            value={firstName}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
             placeholder="First Name"
             className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
           />
           <input
             type="text"
             required
+            value={lastName}
+            onChange={(e) => {
+              setLastName(e.target.value);
+            }}
             placeholder="Last Name"
             className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
           />
@@ -79,6 +109,10 @@ export default function Signup() {
           <input
             type="text"
             required
+            value={userName}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
             placeholder="Username"
             className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
           />
@@ -96,8 +130,12 @@ export default function Signup() {
         </div>
 
         <input
-          type="datetime"
+          type="datetime-local"
           required
+          value={dateOfBirth}
+          onChange={(e) => {
+            setDateOfBirth(e.target.value);
+          }}
           placeholder="Date of Birth"
           className="w-1/2 py-1 px-4 border border-2 bg-first border-third rounded-full"
         />
@@ -130,14 +168,28 @@ export default function Signup() {
         </div>
         <div className="flex w-full gap-8 items-center text-sm py-2">
           <label>
-            <input type="checkbox" /> I agree to the{" "}
+            <input
+              type="checkbox"
+              value={termsAndConditions}
+              onChange={(e) => {
+                setTermsAndConditions(e.target.value);
+              }}
+            />{" "}
+            I agree to the{" "}
             <button className="underline hover:text-second">
               Terms & Conditions
             </button>
             .
           </label>
           <label>
-            <input type="checkbox" /> I agree to the{" "}
+            <input
+              type="checkbox"
+              value={privacyPolicy}
+              onChange={(e) => {
+                setPrivacyPolicy(e.target.value);
+              }}
+            />{" "}
+            I agree to the{" "}
             <button className="underline hover:text-second">
               Privacy Policy
             </button>
