@@ -7,6 +7,7 @@ export default function SignIn() {
   const { userLoggedIn } = useAuth();
 
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(false);
   const [password, setPassword] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -17,7 +18,7 @@ export default function SignIn() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!isSigningIn) {
+    if (!isSigningIn && !emailError) {
       setIsSigningIn(true);
       try {
         await dosignInWithEmailAndPassword(email, password);
@@ -40,6 +41,15 @@ export default function SignIn() {
     }
   };
 
+  const checkEmail = (theemail) => {
+    const validEmail = /^\S+@\S+\.\S+$/;
+    if (theemail !== "") {
+      setEmailError(!validEmail.test(theemail));
+    } else {
+      setEmailError(false);
+    }
+  };
+
   return (
     <div className="h-full flex flex-col gap-2 px-4 justify-center">
       {userLoggedIn && <Navigate to={"/home"} replace={true} />}
@@ -53,13 +63,20 @@ export default function SignIn() {
         className="flex font-montserrat flex-col justify-center gap-2 w-[300px]"
         onSubmit={onSubmit}
       >
+        {emailError && (
+          <span className="text-red-600 text-sm">
+            The email is invalid and might have spaces.
+          </span>
+        )}
         <input
           type="text"
           required
           placeholder="Email Address"
           value={email}
           onChange={(e) => {
-            setEmail(e.target.value);
+            const t = e.target.value;
+            setEmail(t);
+            checkEmail(t);
           }}
           className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
         />

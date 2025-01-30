@@ -16,7 +16,12 @@ export default function Signup() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [usernameError, setUsernameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [confirmationPasswordError, setConfirmationPasswordError] =
+    useState(false);
+  const [termsError, setTermsError] = useState(false);
+  const [privacyError, setPrivacyError] = useState(false);
   const { userLoggedIn } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -43,21 +48,36 @@ export default function Signup() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!isRegistering) {
-      setIsRegistering(true);
-      try {
-        const a = await doCreateUserWithEmailAndPassword(
-          email,
-          password,
-          userName
-        );
-        profileDetails(a);
-      } catch (error) {
-        setErrorMessage(
-          error.message || "An error occurred. Please try again."
-        );
-      } finally {
-        setIsRegistering(false);
+
+    if (
+      !isRegistering &&
+      !passwordError &&
+      !confirmationPasswordError &&
+      !usernameError &&
+      !emailError
+    ) {
+      if (termsAndConditions) {
+        if (privacyPolicy) {
+          setIsRegistering(true);
+          try {
+            const a = await doCreateUserWithEmailAndPassword(
+              email,
+              password,
+              userName
+            );
+            profileDetails(a);
+          } catch (error) {
+            setErrorMessage(
+              error.message || "An error occurred. Please try again."
+            );
+          } finally {
+            setIsRegistering(false);
+          }
+        } else {
+          setPrivacyError(true);
+        }
+      } else {
+        setTermsError(true);
       }
     }
   };
@@ -78,12 +98,31 @@ export default function Signup() {
     setUsernameError(!e);
   };
 
-  const checkPassword = async (thePassword) => {
+  const checkEmail = (theemail) => {
+    const validEmail = /^\S+@\S+\.\S+$/;
+    if (theemail !== "") {
+      setEmailError(!validEmail.test(theemail));
+    } else {
+      setEmailError(false);
+    }
+  };
+  const checkPassword = (thePassword) => {
     const strongPasswordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    setPasswordError(!strongPasswordRegex.test(thePassword));
+    if (thePassword !== "") {
+      setPasswordError(!strongPasswordRegex.test(thePassword));
+    } else {
+      setPasswordError(false);
+    }
   };
 
+  const checkSimilarity = (confirmationPassword) => {
+    if (confirmationPassword !== "") {
+      setConfirmationPasswordError(confirmationPassword !== password);
+    } else {
+      setConfirmationPasswordError(false);
+    }
+  };
   return (
     <div className="flex flex-col gap-2 justify-center px-4">
       {userLoggedIn && <Navigate to={"/home"} replace={true} />}
@@ -100,21 +139,27 @@ export default function Signup() {
         <div className="flex w-full gap-2 items-center justify-center">
           <input
             type="text"
+            pattern="[^ ]+"
             required
             value={firstName}
             onChange={(e) => {
               setFirstName(e.target.value);
             }}
+            minLength={2}
+            max={25}
             placeholder="First Name"
             className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
           />
           <input
             type="text"
+            pattern="[^ ]+"
             required
             value={lastName}
             onChange={(e) => {
               setLastName(e.target.value);
             }}
+            minLength={2}
+            max={25}
             placeholder="Last Name"
             className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
           />
@@ -124,9 +169,15 @@ export default function Signup() {
             This username is not available.
           </span>
         )}
+        {emailError && (
+          <span className="text-red-600 text-sm">
+            The email is invalid and might have spaces.
+          </span>
+        )}
         <div className="flex w-full gap-2 items-center justify-center">
           <input
             type="text"
+            pattern="[^ ]+"
             required
             value={userName}
             onChange={(e) => {
@@ -134,6 +185,8 @@ export default function Signup() {
               setUserName(thename);
               checkUsernameFunction(thename);
             }}
+            minLength={2}
+            max={25}
             placeholder="Username"
             className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
           />
@@ -143,7 +196,9 @@ export default function Signup() {
             required
             value={email}
             onChange={(e) => {
-              setEmail(e.target.value);
+              const t = e.target.value;
+              setEmail(t);
+              checkEmail(t);
             }}
             placeholder="Email Address"
             className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
@@ -164,6 +219,11 @@ export default function Signup() {
         {passwordError && (
           <span className="text-red-600 text-sm">
             This password is too weak.
+          </span>
+        )}
+        {confirmationPasswordError && (
+          <span className="text-red-600 text-sm">
+            This passwords are not similar.
           </span>
         )}
         <div className="flex w-full gap-2 items-center justify-center">
@@ -190,11 +250,24 @@ export default function Signup() {
             placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => {
-              setconfirmPassword(e.target.value);
+              const p = e.target.value;
+              setconfirmPassword(p);
+              checkSimilarity(p);
             }}
             className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
           />
         </div>
+
+        {termsError && (
+          <span className="text-red-600 text-sm">
+            Check the Terms and Conditions.
+          </span>
+        )}
+        {privacyError && (
+          <span className="text-red-600 text-sm">
+            Check the Privacy Policy.
+          </span>
+        )}
         <div className="flex w-full gap-8 items-center text-sm py-2">
           <label>
             <input
@@ -202,7 +275,9 @@ export default function Signup() {
               required
               checked={termsAndConditions}
               onChange={(e) => {
-                setTermsAndConditions(e.target.checked);
+                const c = e.target.checked;
+                setTermsAndConditions(c);
+                setTermsError(!c);
               }}
             />{" "}
             I agree to the{" "}
@@ -217,7 +292,9 @@ export default function Signup() {
               required
               checked={privacyPolicy}
               onChange={(e) => {
-                setPrivacyPolicy(e.target.checked);
+                const c = e.target.checked;
+                setPrivacyPolicy(c);
+                setPrivacyError(!c);
               }}
             />{" "}
             I agree to the{" "}
