@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 
 import Authprovider from "./api/authprovider";
 import Verification from "./pages/Verification";
+import Verified from "./pages/Verified";
 
 const Layout = () => {
   return (
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/verification",
         element: <Verification />,
+      },
+      {
+        path: "/verified",
+        element: <Verified />,
       },
       {
         path: "/signup",
