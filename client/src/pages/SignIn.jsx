@@ -12,9 +12,9 @@ export default function SignIn() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  function handleClose() {
-    setErrorMessage("");
-  }
+  // function handleClose() {
+  //   setErrorMessage("");
+  // }
 
   const onSubmit = async (e) => {
     e.preventDefault();
