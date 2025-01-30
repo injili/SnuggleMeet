@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 
 import Authprovider from "./api/authprovider";
+import Verification from "./pages/Verification";
 
 const Layout = () => {
   return (
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <SignIn />,
+      },
+      {
+        path: "/verification",
+        element: <Verification />,
       },
       {
         path: "/signup",

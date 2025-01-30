@@ -7,7 +7,7 @@ import {
   signInWithPopup,
   updatePassword,
   updateProfile,
-  //   sendEmailVerification,
+  sendEmailVerification,
   //   sendPasswordResetEmail,
 } from "firebase/auth";
 
@@ -50,8 +50,8 @@ export const doPasswordChange = (password) => {
   return updatePassword(auth.currentUser, password);
 };
 
-// export const doSendEmailVerification = () => {
-//   return sendEmailVerification(auth.currentUser, {
-//     url: `${window.location.origin}/home`,
-//   });
-// };
+export const doSendEmailVerification = () => {
+  return sendEmailVerification(auth.currentUser, {
+    url: `${window.location.origin}/home`,
+  });
+};

@@ -125,7 +125,7 @@ export default function Signup() {
   };
   return (
     <div className="flex flex-col gap-2 justify-center px-4">
-      {userLoggedIn && <Navigate to={"/home"} replace={true} />}
+      {userLoggedIn && <Navigate to={"/verification"} replace={true} />}
       <p
         className="mb-4 mt-2 font-montserrat
       "

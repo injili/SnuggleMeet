@@ -8,6 +8,9 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {!currentUser && <Navigate to={"/"} replace={true} />}
+      {!currentUser.emailVerified && (
+        <Navigate to={"/verification"} replace={true} />
+      )}
       <div className="h-full p-8 flex flex-col gap-8 justify-center items-center">
         <div className="w-full flex justify-between items-center">
           <div className="flex gap-4 items-center">
