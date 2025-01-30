@@ -1,6 +1,7 @@
 import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../api/context";
+import { getMaxDate } from "../api/utilities";
 import {
   doSignInWithGoogle,
   doCreateUserWithEmailAndPassword,
@@ -15,6 +16,7 @@ export default function Signup() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [usernameError, setUsernameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
   const { userLoggedIn } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -23,11 +25,6 @@ export default function Signup() {
   const [termsAndConditions, setTermsAndConditions] = useState(false);
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
 
-  const getMaxDate = () => {
-    const now = new Date();
-    now.setFullYear(now.getFullYear() - 13);
-    return now.toISOString().split("T")[0];
-  };
   const profileDetails = async (a) => {
     try {
       await createUserProfile(
@@ -79,6 +76,12 @@ export default function Signup() {
   const checkUsernameFunction = async (thename) => {
     const e = await checkUserName(thename);
     setUsernameError(!e);
+  };
+
+  const checkPassword = async (thePassword) => {
+    const strongPasswordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    setPasswordError(!strongPasswordRegex.test(thePassword));
   };
 
   return (
@@ -158,6 +161,11 @@ export default function Signup() {
           max={getMaxDate()}
           className="w-1/2 py-1 px-4 border border-2 bg-first border-third rounded-full"
         />
+        {passwordError && (
+          <span className="text-red-600 text-sm">
+            This password is too weak.
+          </span>
+        )}
         <div className="flex w-full gap-2 items-center justify-center">
           <input
             disabled={isRegistering}
@@ -167,7 +175,9 @@ export default function Signup() {
             placeholder="Password"
             value={password}
             onChange={(e) => {
-              setPassword(e.target.value);
+              const p = e.target.value;
+              setPassword(p);
+              checkPassword(p);
             }}
             className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
           />
