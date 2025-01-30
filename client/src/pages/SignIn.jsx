@@ -90,7 +90,7 @@ export default function SignIn() {
           }}
           className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
         />
-        {errorMessage && (
+        {/* {errorMessage && (
           <div
             role="alert"
             className=" absolute border border- top-4 right-4 bg-third p-2 rounded-lg"
@@ -142,6 +142,12 @@ export default function SignIn() {
               </button>
             </div>
           </div>
+        )} */}
+
+        {errorMessage && (
+          <span className="text-red-600 text-sm">
+            Wrong credentials. Please try again.
+          </span>
         )}
 
         <button
