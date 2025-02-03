@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { doPasswordChange } from "../api/auth";
+import {
+  Description,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
 
 import theProfile from "../assets/img/pp.jpg";
 import { auth } from "../api/firebase";
@@ -15,6 +21,12 @@ export default function Profile() {
   const [newPassword, setNewPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [newUsername, setNewUsername] = useState("");
+
+  // Dialog Panel Variables
+  const [title, setTitle] = useState("");
 
   const navigate = useNavigate();
   const { currentUser } = useAuth();
@@ -59,6 +71,37 @@ export default function Profile() {
     }
   };
 
+  // Dialog Panel Functions
+  const editProfile = (e) => {
+    if (e === "edit") {
+      setEdit(true);
+    }
+    setTitle("Edit Profile");
+    setIsOpen(true);
+  };
+
+  const renderForm = () => {
+    return (
+      <div>
+        <form action="">
+          <input
+            type="text"
+            value={newUsername}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            placeholder="new username"
+            className="w-full py-1 px-4 border border-2 bg-third border-first rounded-full"
+          />
+        </form>
+      </div>
+    );
+  };
+
+  const closeDialog = () => {
+    setTitle("");
+    setIsOpen(false);
+    setEdit(false);
+  };
+
   return (
     <div className=" flex flex-col gap-4 justify-center px-4 items-center">
       <div className="w-full grid grid-cols-2 gap-4 ">
@@ -80,7 +123,10 @@ export default function Profile() {
                 </div>
               </div>
 
-              <button className="text-third text-semibold">
+              <button
+                onClick={() => editProfile("edit")}
+                className="text-third text-semibold"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="14"
@@ -90,6 +136,41 @@ export default function Profile() {
                   <path d="M7.127 22.564l-7.126 1.436 1.438-7.125 5.688 5.689zm-4.274-7.104l5.688 5.689 15.46-15.46-5.689-5.689-15.459 15.46z" />
                 </svg>
               </button>
+              <Dialog
+                open={isOpen}
+                onClose={() => closeDialog()}
+                className="relative z-50"
+              >
+                <div className="fixed inset-0 z-10 flex w-screen items-center justify-center p-4 bg-opacity-70 bg-blur-2xl bg-third">
+                  <DialogPanel className="border border-2 font-montserrat max-w-lg space-y-4 bg-third text-first p-8 rounded-[15px]  backdrop-blur-2xl">
+                    <Description>
+                      This will permanently deactivate your account
+                    </Description>
+                    <DialogTitle className="font-semibold font-montserrat text-xl">
+                      {title}
+                    </DialogTitle>
+                    <p>
+                      {edit && renderForm()}
+                      Are you sure you want to deactivate your account? All of
+                      your data will be permanently removed.
+                    </p>
+                    <div className="flex gap-4">
+                      <button
+                        onClick={() => closeDialog()}
+                        className="bg-third border border-2 font-semibold px-4 rounded-full hover:bg-first hover:text-third "
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={() => closeDialog()}
+                        className="bg-third border border-2 font-semibold py-1 px-4 rounded-full hover:bg-first hover:text-third "
+                      >
+                        Deactivate
+                      </button>
+                    </div>
+                  </DialogPanel>
+                </div>
+              </Dialog>
             </div>
           </div>
           <div className="w-full rounded-[15px] bg-first border border-2 border-third">
