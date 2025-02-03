@@ -23,9 +23,11 @@ export default function Home() {
               <p className="text-xl text-first font-alata">Room A</p>
             </div>
             <div className="flex justify-between items-center m-4">
-              <p className="text-xs py-1 text-first font-medium font-montserrat">
-                injili, tweet, scale, trees
-              </p>
+              <div className="flex gap-2 items-center">
+                <p className="text-xs py-1 text-first font-medium font-montserrat">
+                  injili, tweet, scale, trees
+                </p>
+              </div>
               <button
                 onClick={() => {
                   navigate("/room");
@@ -62,12 +64,7 @@ export default function Home() {
               <p className="text-xs py-1 text-first font-medium font-montserrat">
                 injili, tweet, scale, trees
               </p>
-              <button
-                onClick={() => {
-                  navigate("/room");
-                }}
-                className="py-1 bg-first rounded-full text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first"
-              >
+              <button className="py-1 bg-first rounded-full text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first">
                 Join
               </button>
             </div>
@@ -83,23 +80,13 @@ export default function Home() {
               <p className="text-xs py-1 text-first font-medium font-montserrat">
                 injili, tweet, scale, trees
               </p>
-              <button
-                onClick={() => {
-                  navigate("/room");
-                }}
-                className="py-1 bg-first rounded-full text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first"
-              >
+              <button className="py-1 bg-first rounded-full text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first">
                 Join
               </button>
             </div>
           </div>
         </div>
-        <button
-          onClick={() => {
-            navigate("/room");
-          }}
-          className="py-1 w-2/6 flex items-center justify-center gap-2 bg-first rounded-full text-third text-sm font-montserrat font-semibold hover:bg-third hover:text-first border border-2 border-third"
-        >
+        <button className="py-1 w-2/6 flex items-center justify-center gap-2 bg-first rounded-full text-third text-sm font-montserrat font-semibold hover:bg-third hover:text-first border border-2 border-third">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="8"
