@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Room from "./pages/Room";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+import OtherProfile from "./pages/OtherProfile";
 
 import Authprovider from "./api/authprovider";
 import Verification from "./pages/Verification";
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/oprofile",
+        element: <OtherProfile />,
       },
       {
         path: "/home",

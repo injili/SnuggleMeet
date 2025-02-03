@@ -74,7 +74,9 @@ export default function Profile() {
                   className="rounded-full"
                 />
                 <div className=" text-third font-montserrat font-semibold font-medium rounded-full bg-first">
-                  Nyash
+                  {currentUser.displayName
+                    ? currentUser.displayName
+                    : currentUser.email}
                 </div>
               </div>
 

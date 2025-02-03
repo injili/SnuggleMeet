@@ -74,7 +74,9 @@ export default function OtherProfile() {
                   className="rounded-full"
                 />
                 <div className=" text-third font-montserrat font-semibold font-medium rounded-full bg-first">
-                  Nyash
+                  {currentUser.displayName
+                    ? currentUser.displayName
+                    : currentUser.email}
                 </div>
               </div>
 
@@ -88,24 +90,6 @@ export default function OtherProfile() {
                   <path d="M7.127 22.564l-7.126 1.436 1.438-7.125 5.688 5.689zm-4.274-7.104l5.688 5.689 15.46-15.46-5.689-5.689-15.459 15.46z" />
                 </svg>
               </button>
-            </div>
-          </div>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
-            <div className="flex justify-between items-center m-4 pb-4 border-b-2 border-third">
-              <div className="font-montserrat text-sm font-semibold text-third ">
-                Nyareki Gospel
-              </div>
-              <p className="text-xs text-first px-2 py-1 font-montserrat font-medium bg-second rounded-full">
-                verified
-              </p>
-            </div>
-            <div className="flex-col justify-start items-end px-4 pb-4">
-              <p className="text-xs text-third font-medium font-montserrat">
-                Date Of Birth: 24th, June, 2000
-              </p>
-              <p className="text-xs py-1 text-third font-medium font-montserrat">
-                Email Address: petertimber@gmail.com
-              </p>
             </div>
           </div>
           <div className="w-full rounded-[15px] bg-first border border-2 border-third">
@@ -171,16 +155,6 @@ export default function OtherProfile() {
           <div className="w-full rounded-[15px] bg-first border border-2 border-third">
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
-                Friend Requests
-              </p>
-              <p className="bg-second py-1 px-2 font-montserrattext-xs text-first rounded-full">
-                0
-              </p>
-            </div>
-          </div>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
-            <div className="flex justify-between items-center p-4">
-              <p className="font-montserrat text-sm font-semibold text-third ">
                 Friends
               </p>
               <p className="bg-second py-1 px-2 font-montserrat text-xs text-first rounded-full">
@@ -191,49 +165,11 @@ export default function OtherProfile() {
           <div className="w-full rounded-[15px] bg-first border border-2 border-third">
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
-                Attended Sessions
+                Current Room
               </p>
-              <div className="flex justify-center gap-1 items-center">
-                <div className="text-second">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path d="M16 18c0 1.104-.896 2-2 2h-12c-1.105 0-2-.896-2-2v-12c0-1.104.895-2 2-2h12c1.104 0 2 .896 2 2v12zm8-14l-6 6.223v3.554l6 6.223v-16z" />
-                  </svg>
-                </div>
-                <p className="font-montserrat font-semibold text-sm text-center">
-                  14
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
-            <div className="flex justify-between items-center p-4">
-              <p className="font-montserrat text-sm font-semibold text-third ">
-                Change Password
+              <p className="bg-second py-1 px-2 font-montserrat text-xs text-first rounded-full">
+                Powder
               </p>
-            </div>
-          </div>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
-            <div className="flex justify-between items-center p-4">
-              <p className="font-montserrat text-sm font-semibold text-third ">
-                Attended Sessions
-              </p>
-              <div className="text-red-500">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M19 24h-14c-1.104 0-2-.896-2-2v-17h-1v-2h6v-1.5c0-.827.673-1.5 1.5-1.5h5c.825 0 1.5.671 1.5 1.5v1.5h6v2h-1v17c0 1.104-.896 2-2 2zm0-19h-14v16.5c0 .276.224.5.5.5h13c.276 0 .5-.224.5-.5v-16.5zm-9 4c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm6 0c0-.552-.448-1-1-1s-1 .448-1 1v9c0 .552.448 1 1 1s1-.448 1-1v-9zm-2-7h-4v1h4v-1z" />
-                </svg>
-              </div>
             </div>
           </div>
         </div>

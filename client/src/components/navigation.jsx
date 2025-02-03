@@ -21,7 +21,7 @@ export default function Navigation() {
       );
     } else if (location.pathname === "/home") {
       return (
-        <Link to="/profile">
+        <Link to="/oprofile">
           <h1 className="text-3xl font-montserrat font-semibold ">
             {currentUser.displayName
               ? currentUser.displayName
