@@ -21,7 +21,7 @@ export default function Navigation() {
       );
     } else if (location.pathname === "/home") {
       return (
-        <Link to="/oprofile">
+        <Link to="/profile">
           <h1 className="text-3xl font-montserrat font-semibold ">
             {currentUser.displayName
               ? currentUser.displayName
@@ -33,6 +33,12 @@ export default function Navigation() {
       return (
         <h1 className="text-2xl font-montserrat font-semibold ">
           Your Profile
+        </h1>
+      );
+    } else if (location.pathname == "/oprofile") {
+      return (
+        <h1 className="text-2xl font-montserrat font-semibold ">
+          View Profile
         </h1>
       );
     }

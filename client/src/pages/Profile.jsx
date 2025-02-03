@@ -223,7 +223,7 @@ export default function Profile() {
           <div className="w-full rounded-[15px] bg-first border border-2 border-third">
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
-                Attended Sessions
+                Delete Account
               </p>
               <div className="text-red-500">
                 <svg

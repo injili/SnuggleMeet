@@ -61,37 +61,50 @@ export default function OtherProfile() {
 
   return (
     <div className=" flex flex-col gap-4 justify-center px-4 items-center">
-      <div className="w-full grid grid-cols-2 gap-4 ">
-        <div className="flex flex-col gap-4 justify-start">
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
-            <div className="flex justify-between items-center p-4">
-              <div className="flex items-center gap-4">
-                <img
-                  src={theProfile}
-                  width="35"
-                  height="35"
-                  alt="the valediktoria logo"
-                  className="rounded-full"
-                />
-                <div className=" text-third font-montserrat font-semibold font-medium rounded-full bg-first">
-                  {currentUser.displayName
-                    ? currentUser.displayName
-                    : currentUser.email}
-                </div>
-              </div>
-
-              <button className="text-third text-semibold">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M7.127 22.564l-7.126 1.436 1.438-7.125 5.688 5.689zm-4.274-7.104l5.688 5.689 15.46-15.46-5.689-5.689-15.459 15.46z" />
-                </svg>
-              </button>
+      <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+        <div className="flex justify-between items-center p-4">
+          <div className="flex items-center gap-4">
+            <img
+              src={theProfile}
+              width="35"
+              height="35"
+              alt="the valediktoria logo"
+              className="rounded-full"
+            />
+            <div className=" text-third font-montserrat font-semibold font-medium rounded-full bg-first">
+              {currentUser.displayName
+                ? currentUser.displayName
+                : currentUser.email}
+            </div>
+            <div className="text-second">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="8"
+                height="8"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <circle cx="12" cy="12" r="12" />
+              </svg>
             </div>
           </div>
+
+          <button className="py-1 px-4 flex items-center justify-center gap-2 bg-first rounded-full text-third text-sm font-montserrat font-semibold hover:bg-third hover:text-first border border-2 border-third">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M24 0l-6 22-8.129-7.239 7.802-8.234-10.458 7.227-7.215-1.754 24-12zm-15 16.668v7.332l3.258-4.431-3.258-2.901z" />
+            </svg>
+            Send Friend Request
+          </button>
+        </div>
+      </div>
+      <div className="w-full grid grid-cols-2 gap-4 ">
+        <div className="flex flex-col gap-4 justify-start">
           <div className="w-full rounded-[15px] bg-first border border-2 border-third">
             <div className="flex justify-between items-center m-4 pb-4 border-b-2 border-third">
               <div className="font-montserrat text-sm font-semibold text-third ">
