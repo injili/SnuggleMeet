@@ -83,15 +83,29 @@ export default function Profile() {
   const renderForm = () => {
     return (
       <div>
+        <Description>Modify your Profile.</Description>
         <form action="">
           <input
             type="text"
             value={newUsername}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            placeholder="new username"
-            className="w-full py-1 px-4 border border-2 bg-third border-first rounded-full"
+            onChange={(e) => setNewUsername(e.target.value)}
+            placeholder="New Username"
+            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
           />
         </form>
+        <button className="flex items-center justify-center gap-2 bg-first border border-2 border-third font-montserrat font-semibold py-1 px-8 mt-1 rounded-full hover:bg-first hover:text-third ">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M23 0v20h-8v-2h6v-16h-18v16h6v2h-8v-20h22zm-12 13h-4l5-6 5 6h-4v11h-2v-11z" />
+          </svg>
+          Upload New Photo
+        </button>
+        <Description>Commit your changes below.</Description>
       </div>
     );
   };
@@ -125,7 +139,7 @@ export default function Profile() {
 
               <button
                 onClick={() => editProfile("edit")}
-                className="text-third text-semibold"
+                className="text-third hover:text-second text-semibold"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -142,30 +156,25 @@ export default function Profile() {
                 className="relative z-50"
               >
                 <div className="fixed inset-0 z-10 flex w-screen items-center justify-center p-4 bg-opacity-70 bg-blur-2xl bg-third">
-                  <DialogPanel className="border border-2 font-montserrat max-w-lg space-y-4 bg-third text-first p-8 rounded-[15px]  backdrop-blur-2xl">
-                    <Description>
-                      This will permanently deactivate your account
-                    </Description>
+                  <DialogPanel className="font-montserrat w-full max-w-lg space-y-4 bg-first text-third p-8 rounded-[15px]">
                     <DialogTitle className="font-semibold font-montserrat text-xl">
                       {title}
                     </DialogTitle>
-                    <p>
-                      {edit && renderForm()}
-                      Are you sure you want to deactivate your account? All of
-                      your data will be permanently removed.
-                    </p>
+
+                    {edit && renderForm()}
+
                     <div className="flex gap-4">
                       <button
                         onClick={() => closeDialog()}
-                        className="bg-third border border-2 font-semibold px-4 rounded-full hover:bg-first hover:text-third "
+                        className="bg-first border border-2 border-third font-semibold px-4 rounded-full hover:bg-third hover:text-first text-sm"
                       >
                         Cancel
                       </button>
                       <button
                         onClick={() => closeDialog()}
-                        className="bg-third border border-2 font-semibold py-1 px-4 rounded-full hover:bg-first hover:text-third "
+                        className="bg-first border border-2 border-third font-semibold py-1 px-4 rounded-full hover:bg-third hover:text-first text-sm"
                       >
-                        Deactivate
+                        Save
                       </button>
                     </div>
                   </DialogPanel>
