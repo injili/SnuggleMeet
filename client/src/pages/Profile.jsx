@@ -23,7 +23,12 @@ export default function Profile() {
   const [successMessage, setSuccessMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [stats, setStats] = useState(false);
+  const [streak, setStreak] = useState("78");
   const [newUsername, setNewUsername] = useState("");
+  const [newBio, setNewBio] = useState("");
+  const [Leaderboard, setLeaderboard] = useState("2");
+  const [requests, setRequests] = useState(false);
 
   // Dialog Panel Variables
   const [title, setTitle] = useState("");
@@ -72,17 +77,22 @@ export default function Profile() {
   };
 
   // Dialog Panel Functions
-  const editProfile = (e) => {
+  const renderContent = (e) => {
     if (e === "edit") {
       setEdit(true);
+      setTitle("Edit Profile");
+    } else if (e === "stats") {
+      setStats(true);
+      setTitle("View Stats");
+    } else if (e === "requests") {
+      setRequests(true);
     }
-    setTitle("Edit Profile");
     setIsOpen(true);
   };
 
   const renderForm = () => {
     return (
-      <div>
+      <div className="flex flex-col gap-2">
         <Description>Modify your Profile.</Description>
         <form action="">
           <input
@@ -93,7 +103,16 @@ export default function Profile() {
             className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
           />
         </form>
-        <button className="flex items-center justify-center gap-2 bg-first border border-2 border-third font-montserrat font-semibold py-1 px-8 mt-1 rounded-full hover:bg-first hover:text-third ">
+        <form action="">
+          <input
+            type="textarea"
+            value={newBio}
+            onChange={(e) => setNewBio(e.target.value)}
+            placeholder="Bio"
+            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
+          />
+        </form>
+        <button className="flex items-center justify-center gap-2 bg-first border border-2 border-third font-montserrat font-semibold py-1 px-8 rounded-full hover:bg-third hover:text-first">
           <svg
             width="15"
             height="15"
@@ -106,8 +125,59 @@ export default function Profile() {
           Upload New Photo
         </button>
         <Description>Commit your changes below.</Description>
+        <div className="flex gap-4">
+          <button
+            onClick={() => closeDialog()}
+            className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => closeDialog()}
+            className="bg-first border border-2 border-third font-semibold py-1 px-8 rounded-full hover:bg-third hover:text-first text-sm"
+          >
+            Save
+          </button>
+        </div>
       </div>
     );
+  };
+
+  const renderStats = () => {
+    return (
+      <div className="flex flex-col gap-2 font-montserrat">
+        <div>
+          <p>
+            Streak: <span className="font-semibold">{streak}</span>
+          </p>
+          <p>
+            Leaderboard Position:{" "}
+            <span className="font-semibold">{Leaderboard}</span>
+          </p>
+        </div>
+        <div className="flex">
+          <button
+            onClick={() => closeDialog()}
+            className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const renderRequests = () => {
+    return <div>Will do an update on this</div>;
+  };
+  const whatToRender = () => {
+    if (edit) {
+      return renderForm();
+    } else if (stats) {
+      return renderStats();
+    } else if (requests) {
+      return renderRequests();
+    }
   };
 
   const closeDialog = () => {
@@ -138,7 +208,7 @@ export default function Profile() {
               </div>
 
               <button
-                onClick={() => editProfile("edit")}
+                onClick={() => renderContent("edit")}
                 className="text-third hover:text-second text-semibold"
               >
                 <svg
@@ -161,22 +231,7 @@ export default function Profile() {
                       {title}
                     </DialogTitle>
 
-                    {edit && renderForm()}
-
-                    <div className="flex gap-4">
-                      <button
-                        onClick={() => closeDialog()}
-                        className="bg-first border border-2 border-third font-semibold px-4 rounded-full hover:bg-third hover:text-first text-sm"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        onClick={() => closeDialog()}
-                        className="bg-first border border-2 border-third font-semibold py-1 px-4 rounded-full hover:bg-third hover:text-first text-sm"
-                      >
-                        Save
-                      </button>
-                    </div>
+                    {whatToRender()}
                   </DialogPanel>
                 </div>
               </Dialog>
@@ -219,7 +274,10 @@ export default function Profile() {
           </div>
         </div>
         <div className="flex flex-col gap-4 justify-start">
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+          <button
+            onClick={() => renderContent("stats")}
+            className="w-full rounded-[15px] bg-first border border-2 border-third"
+          >
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Stats
@@ -238,7 +296,7 @@ export default function Profile() {
                     </svg>
                   </div>
                   <p className="font-montserrat font-semibold text-sm text-center">
-                    122
+                    {streak}
                   </p>
                 </div>
                 <div className="flex justify-center gap-1 items-center">
@@ -254,13 +312,16 @@ export default function Profile() {
                     </svg>
                   </div>
                   <p className="font-montserrat font-semibold text-sm text-center">
-                    122
+                    {Leaderboard}
                   </p>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+          </button>
+          <button
+            onClick={() => renderContent("requests")}
+            className="w-full rounded-[15px] bg-first border border-2 border-third"
+          >
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Friend Requests
@@ -269,7 +330,7 @@ export default function Profile() {
                 0
               </p>
             </div>
-          </div>
+          </button>
           <div className="w-full rounded-[15px] bg-first border border-2 border-third">
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
