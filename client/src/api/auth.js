@@ -23,7 +23,7 @@ export const doCreateUserWithEmailAndPassword = async (
     });
     return newUser.user.uid;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 };
 
