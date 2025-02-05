@@ -29,7 +29,10 @@ export default function Profile() {
   const [newBio, setNewBio] = useState("");
   const [Leaderboard, setLeaderboard] = useState("2");
   const [friends, setFriends] = useState(false);
+  const [sessions, setSessions] = useState(false);
   const [requests, setRequests] = useState(false);
+  const [password, setPassword] = useState(false);
+  const [deletion, setDeletion] = useState(false);
 
   // Dialog Panel Variables
   const [title, setTitle] = useState("");
@@ -51,6 +54,7 @@ export default function Profile() {
       // Attempt to update password using doPasswordChange
       await doPasswordChange(newPassword);
       setSuccessMessage("Password updated successfully.");
+      closeDialog();
     } catch (error) {
       if (error.code === "auth/requires-recent-login") {
         // Handle re-authentication
@@ -91,6 +95,15 @@ export default function Profile() {
     } else if (e === "friends") {
       setTitle("Friends");
       setFriends(true);
+    } else if (e === "sessions") {
+      setTitle("Attended Sessions");
+      setSessions(true);
+    } else if (e === "password") {
+      setTitle("Change Password");
+      setPassword(true);
+    } else if (e === "delete") {
+      setTitle("Delete Account");
+      setDeletion(true);
     }
     setIsOpen(true);
   };
@@ -218,6 +231,109 @@ export default function Profile() {
     );
   };
 
+  const renderSessions = () => {
+    return (
+      <div>
+        <ul>
+          <li className="flex gap-2">
+            <span>18th Jan, 2025</span>
+            <span>11:14:17</span>
+            <span>to</span>
+            <span>12:32:16</span>
+          </li>
+          <li className="flex gap-2">
+            <span>18th Jan, 2025</span>
+            <span>10:10:37</span>
+            <span>to</span>
+            <span>12:42:06</span>
+          </li>
+        </ul>
+        <div className="flex mt-2">
+          <button
+            onClick={() => closeDialog()}
+            className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const renderPassword = () => {
+    return (
+      <div className="flex flex-col gap-2">
+        <Description>Change your Password here.</Description>
+        <form className="flex flex-col gap-2" onSubmit={handlePasswordChange}>
+          <input
+            type="password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            placeholder="Old Password"
+            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
+          />
+          <input
+            type="password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            placeholder="New Password"
+            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
+          />
+          <div className="flex gap-4">
+            <button
+              onClick={() => closeDialog()}
+              className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="bg-first border border-2 border-third font-semibold py-1 px-8 rounded-full hover:bg-third hover:text-first text-sm"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+        <Description>Commit your changes below.</Description>
+      </div>
+    );
+  };
+
+  const renderDelete = () => {
+    return (
+      <div>
+        <Description>
+          Type the text below on the space to delete account.
+        </Description>
+        <form className="flex flex-col gap-2" onSubmit={handlePasswordChange}>
+          <p className="font-bold text-red-500">
+            I want to delete my account under username {currentUser.displayName}
+          </p>
+          <input
+            type="text"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            className="w-full py-1 px-4 border border-2 border-red-500 bg-first border-first rounded-full"
+          />
+          <div className="flex gap-4">
+            <button
+              onClick={() => closeDialog()}
+              className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="bg-first border border-2 border-third font-semibold py-1 px-8 rounded-full hover:bg-red-500 hover:border-red-500 hover:text-first text-sm"
+            >
+              Delete
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  };
+
   const whatToRender = () => {
     if (edit) {
       return renderForm();
@@ -227,6 +343,12 @@ export default function Profile() {
       return renderRequests();
     } else if (friends) {
       return renderFriends();
+    } else if (sessions) {
+      return renderSessions();
+    } else if (password) {
+      return renderPassword();
+    } else if (deletion) {
+      return renderDelete();
     }
   };
 
@@ -237,6 +359,9 @@ export default function Profile() {
     setStats(false);
     setRequests(false);
     setFriends(false);
+    setSessions(false);
+    setPassword(false);
+    setDeletion(false);
   };
 
   return (
@@ -398,7 +523,12 @@ export default function Profile() {
               </p>
             </div>
           </button>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+          <button
+            onClick={() => {
+              renderContent("sessions");
+            }}
+            className="w-full rounded-[15px] bg-first border border-2 border-third"
+          >
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Attended Sessions
@@ -420,15 +550,21 @@ export default function Profile() {
                 </p>
               </div>
             </div>
-          </div>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+          </button>
+          <button
+            onClick={() => renderContent("password")}
+            className="w-full rounded-[15px] bg-first border border-2 border-third"
+          >
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Change Password
               </p>
             </div>
-          </div>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+          </button>
+          <button
+            onClick={() => renderContent("delete")}
+            className="w-full rounded-[15px] bg-first border border-2 border-third"
+          >
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Delete Account
@@ -445,7 +581,7 @@ export default function Profile() {
                 </svg>
               </div>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </div>
