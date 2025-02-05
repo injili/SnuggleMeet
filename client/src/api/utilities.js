@@ -3,3 +3,5 @@ export const getMaxDate = () => {
   now.setFullYear(now.getFullYear() - 13);
   return now.toISOString().split("T")[0];
 };
+
+export const leaderBoardRanking = () => {};
