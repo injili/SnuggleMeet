@@ -31,9 +31,12 @@ export default function Navigation() {
       );
     } else if (location.pathname === "/profile") {
       return (
-        <h1 className="text-2xl font-montserrat font-semibold ">
-          Your Profile
-        </h1>
+        <div className="flex w-full justify-between">
+          <h1 className="text-2xl font-montserrat font-semibold ">
+            Your Profile
+          </h1>
+          <button>Log Out</button>
+        </div>
       );
     } else if (location.pathname == "/oprofile") {
       return (

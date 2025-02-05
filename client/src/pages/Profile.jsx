@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { doPasswordChange } from "../api/auth";
+import { changeBio, checkUserName } from "../api/userinfo";
 import {
   Description,
   Dialog,
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
+
+import { updateProfile } from "firebase/auth";
 
 import theProfile from "../assets/img/pp.jpg";
 import { auth } from "../api/firebase";
@@ -19,7 +22,6 @@ import theLogo from "../assets/img/icon.png";
 export default function Profile() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -33,6 +35,10 @@ export default function Profile() {
   const [requests, setRequests] = useState(false);
   const [password, setPassword] = useState(false);
   const [deletion, setDeletion] = useState(false);
+
+  // errors
+  const [errorMessage, setErrorMessage] = useState("");
+  const [usernameError, setUsernameError] = useState(false);
 
   // Dialog Panel Variables
   const [title, setTitle] = useState("");
@@ -108,20 +114,35 @@ export default function Profile() {
     setIsOpen(true);
   };
 
-  const renderForm = () => {
+  const checkUsernameFunction = async (thename) => {
+    const e = await checkUserName(thename);
+    setUsernameError(!e);
+  };
+
+  const renderUser = () => {
     return (
       <div className="flex flex-col gap-2">
         <Description>Modify your Profile.</Description>
-        <form action="">
+        <form>
+          {usernameError && (
+            <span className="text-red-600 text-sm">
+              This username is not available.
+            </span>
+          )}
           <input
             type="text"
+            pattern="[^ ]+"
             value={newUsername}
-            onChange={(e) => setNewUsername(e.target.value)}
+            onChange={(e) => {
+              const thename = e.target.value;
+              setNewUsername(thename);
+              checkUsernameFunction(thename);
+            }}
             placeholder="New Username"
             className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
           />
         </form>
-        <form action="">
+        <form>
           <input
             type="textarea"
             value={newBio}
@@ -151,10 +172,10 @@ export default function Profile() {
             Cancel
           </button>
           <button
-            onClick={() => closeDialog()}
+            onClick={() => changeUSerProfile()}
             className="bg-first border border-2 border-third font-semibold py-1 px-8 rounded-full hover:bg-third hover:text-first text-sm"
           >
-            Save
+            Save Changes
           </button>
         </div>
       </div>
@@ -336,7 +357,7 @@ export default function Profile() {
 
   const whatToRender = () => {
     if (edit) {
-      return renderForm();
+      return renderUser();
     } else if (stats) {
       return renderStats();
     } else if (requests) {
@@ -362,6 +383,21 @@ export default function Profile() {
     setSessions(false);
     setPassword(false);
     setDeletion(false);
+  };
+
+  const changeUSerProfile = async () => {
+    try {
+      if (newUsername !== "") {
+        updateProfile(currentUser, {
+          displayName: newUsername,
+        });
+      }
+      if (newBio !== "") {
+        changeBio(currentUser.uid, newBio);
+      }
+    } catch (error) {
+      setErrorMessage(error);
+    }
   };
 
   return (
