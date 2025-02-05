@@ -43,7 +43,7 @@ export const checkUserName = async (userName) => {
 export const changeBio = async (userId, bio) => {
   try {
     const querySnapshot = await getDocs(
-      query(userRecordsCollectionRef, where("", "==", userId))
+      query(userRecordsCollectionRef, where("userID", "==", userId))
     );
     if (!querySnapshot.empty) {
       querySnapshot.forEach(async (doc) => {

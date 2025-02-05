@@ -7,17 +7,13 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-
 import { updateProfile } from "firebase/auth";
-
 import theProfile from "../assets/img/pp.jpg";
 import { auth } from "../api/firebase";
 import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../api/context";
 import { doSignOut } from "../api/auth";
-
-import theLogo from "../assets/img/icon.png";
 
 export default function Profile() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -39,9 +35,12 @@ export default function Profile() {
   // errors
   const [errorMessage, setErrorMessage] = useState("");
   const [usernameError, setUsernameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   // Dialog Panel Variables
   const [title, setTitle] = useState("");
+
+  const user = auth.currentUser;
 
   const navigate = useNavigate();
   const { currentUser } = useAuth();
@@ -49,6 +48,9 @@ export default function Profile() {
   function handleClose() {
     setErrorMessage("");
     setSuccessMessage("");
+    setNewPassword("");
+    setCurrentPassword("");
+    setIsOpen(false);
   }
 
   const handlePasswordChange = async (e) => {
@@ -66,7 +68,7 @@ export default function Profile() {
         // Handle re-authentication
         await handleReauthentication();
       } else {
-        setErrorMessage("Failed to update password: " + error.message);
+        setPasswordError(true);
       }
     }
   };
@@ -172,7 +174,7 @@ export default function Profile() {
             Cancel
           </button>
           <button
-            onClick={() => changeUSerProfile()}
+            onClick={() => changeProfile()}
             className="bg-first border border-2 border-third font-semibold py-1 px-8 rounded-full hover:bg-third hover:text-first text-sm"
           >
             Save Changes
@@ -286,6 +288,9 @@ export default function Profile() {
       <div className="flex flex-col gap-2">
         <Description>Change your Password here.</Description>
         <form className="flex flex-col gap-2" onSubmit={handlePasswordChange}>
+          {passwordError && (
+            <span className="text-red-600 text-sm">Incorrect Password.</span>
+          )}
           <input
             type="password"
             value={currentPassword}
@@ -311,7 +316,7 @@ export default function Profile() {
               type="submit"
               className="bg-first border border-2 border-third font-semibold py-1 px-8 rounded-full hover:bg-third hover:text-first text-sm"
             >
-              Save
+              Change
             </button>
           </div>
         </form>
@@ -385,23 +390,127 @@ export default function Profile() {
     setDeletion(false);
   };
 
-  const changeUSerProfile = async () => {
+  const changeProfile = async () => {
     try {
-      if (newUsername !== "") {
-        updateProfile(currentUser, {
+      if (newUsername !== "" && !usernameError) {
+        await updateProfile(user, {
           displayName: newUsername,
         });
       }
       if (newBio !== "") {
         changeBio(currentUser.uid, newBio);
       }
+      closeDialog();
+      window.location.reload();
     } catch (error) {
-      setErrorMessage(error);
+      console.log("The error", error);
     }
   };
 
   return (
-    <div className=" flex flex-col gap-4 justify-center px-4 items-center">
+    <div className=" z-60 flex flex-col gap-4 justify-center px-4 items-center">
+      {errorMessage && (
+        <div
+          role="alert"
+          className=" absolute rounded-lg top-4 right-4 bg-second p-2"
+        >
+          <div className="flex items-center gap-4">
+            <span className="text-first">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </span>
+
+            <div className="flex-1">
+              <p className="text-first text-sm">Failed to reset password</p>
+            </div>
+
+            <button
+              onClick={handleClose}
+              className="text-first transition hover:text-fifth"
+            >
+              <span className="sr-only">Dismiss popup</span>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+      {successMessage && (
+        <div
+          role="alert"
+          className="z-60 absolute border border-fifth top-4 right-4 bg-second p-2"
+        >
+          <div className="flex items-center gap-4">
+            <span className="text-first">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </span>
+
+            <div className="flex-1">
+              <p className="text-first font-alata text-sm">{successMessage}</p>
+            </div>
+
+            <button
+              onClick={handleClose}
+              className="text-first transition hover:text-forth"
+            >
+              <span className="sr-only">Dismiss popup</span>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
       <div className="w-full grid grid-cols-2 gap-4 ">
         <div className="flex flex-col gap-4 justify-start">
           <div className="w-full rounded-[15px] bg-first border border-2 border-third">
@@ -415,10 +524,9 @@ export default function Profile() {
                   className="rounded-full"
                 />
                 <div className=" text-third font-montserrat font-semibold font-medium rounded-full bg-first">
-                  {/* {currentUser.displayName
+                  {currentUser.displayName
                     ? currentUser.displayName
-                    : currentUser.email} */}
-                  <p>Nyareki</p>
+                    : currentUser.email}
                 </div>
               </div>
 
