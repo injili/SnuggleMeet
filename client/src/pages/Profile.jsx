@@ -28,6 +28,7 @@ export default function Profile() {
   const [newUsername, setNewUsername] = useState("");
   const [newBio, setNewBio] = useState("");
   const [Leaderboard, setLeaderboard] = useState("2");
+  const [friends, setFriends] = useState(false);
   const [requests, setRequests] = useState(false);
 
   // Dialog Panel Variables
@@ -85,7 +86,11 @@ export default function Profile() {
       setStats(true);
       setTitle("View Stats");
     } else if (e === "requests") {
+      setTitle("Friend Requests");
       setRequests(true);
+    } else if (e === "friends") {
+      setTitle("Friends");
+      setFriends(true);
     }
     setIsOpen(true);
   };
@@ -168,8 +173,51 @@ export default function Profile() {
   };
 
   const renderRequests = () => {
-    return <div>Will do an update on this</div>;
+    return (
+      <div>
+        <ul>
+          <li>
+            <span>Name Here </span>
+            <button className="ml-4 px-4 border border-2 border-third rounded-full hover:bg-third hover:text-first text-sm">
+              accept
+            </button>
+          </li>
+        </ul>
+        <div className="flex mt-2">
+          <button
+            onClick={() => closeDialog()}
+            className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    );
   };
+
+  const renderFriends = () => {
+    return (
+      <div>
+        <ul>
+          <li>
+            <span>Name Here </span>
+            <button className="ml-4 px-4 border border-2 border-third rounded-full hover:bg-third hover:text-first text-sm">
+              unfriend
+            </button>
+          </li>
+        </ul>
+        <div className="flex mt-2">
+          <button
+            onClick={() => closeDialog()}
+            className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   const whatToRender = () => {
     if (edit) {
       return renderForm();
@@ -177,6 +225,8 @@ export default function Profile() {
       return renderStats();
     } else if (requests) {
       return renderRequests();
+    } else if (friends) {
+      return renderFriends();
     }
   };
 
@@ -184,6 +234,9 @@ export default function Profile() {
     setTitle("");
     setIsOpen(false);
     setEdit(false);
+    setStats(false);
+    setRequests(false);
+    setFriends(false);
   };
 
   return (
@@ -201,9 +254,10 @@ export default function Profile() {
                   className="rounded-full"
                 />
                 <div className=" text-third font-montserrat font-semibold font-medium rounded-full bg-first">
-                  {currentUser.displayName
+                  {/* {currentUser.displayName
                     ? currentUser.displayName
-                    : currentUser.email}
+                    : currentUser.email} */}
+                  <p>Nyareki</p>
                 </div>
               </div>
 
@@ -243,7 +297,7 @@ export default function Profile() {
                 Nyareki Gospel
               </div>
               <p className="text-xs text-first px-2 py-1 font-montserrat font-medium bg-second rounded-full">
-                verified
+                {currentUser.emailVerified ? "verified" : "not verified"}
               </p>
             </div>
             <div className="flex-col justify-start items-end px-4 pb-4">
@@ -331,7 +385,10 @@ export default function Profile() {
               </p>
             </div>
           </button>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+          <button
+            onClick={() => renderContent("friends")}
+            className="w-full rounded-[15px] bg-first border border-2 border-third"
+          >
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Friends
@@ -340,7 +397,7 @@ export default function Profile() {
                 14
               </p>
             </div>
-          </div>
+          </button>
           <div className="w-full rounded-[15px] bg-first border border-2 border-third">
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
