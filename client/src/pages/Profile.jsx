@@ -1,5 +1,10 @@
-import { useState } from "react";
-import { doPasswordChange } from "../api/auth";
+import { useState, useEffect } from "react";
+import {
+  checkAuthProvider,
+  doPasswordChange,
+  deleteAccount,
+  checkText,
+} from "../api/auth";
 import { changeBio, checkUserName } from "../api/userinfo";
 import {
   Description,
@@ -31,6 +36,9 @@ export default function Profile() {
   const [requests, setRequests] = useState(false);
   const [password, setPassword] = useState(false);
   const [deletion, setDeletion] = useState(false);
+  const [isPassword, setIsPassword] = useState(true);
+  const [deletionText, setDeletionText] = useState("");
+  const [isBorder, setIsBorder] = useState(false);
 
   // errors
   const [errorMessage, setErrorMessage] = useState("");
@@ -45,14 +53,26 @@ export default function Profile() {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
-  function handleClose() {
+  const handleClose = () => {
     setErrorMessage("");
     setSuccessMessage("");
     setNewPassword("");
     setCurrentPassword("");
     setIsOpen(false);
-  }
+  };
 
+  useEffect(() => {
+    setIsPassword(checkAuthProvider());
+  }, []);
+
+  const handleDeleteAccount = async (e) => {
+    e.preventDefault();
+    if (isBorder) {
+      return await deleteAccount(currentPassword);
+    } else {
+      setErrorMessage("Please try again.");
+    }
+  };
   const handlePasswordChange = async (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -329,17 +349,41 @@ export default function Profile() {
     return (
       <div>
         <Description>
-          Type the text below on the space to delete account.
+          Type in your password and the text below on the space to delete
+          account.
         </Description>
-        <form className="flex flex-col gap-2" onSubmit={handlePasswordChange}>
-          <p className="font-bold text-red-500">
+        <form
+          className="flex flex-col mt-2 gap-2"
+          onSubmit={handleDeleteAccount}
+        >
+          <input
+            type="password"
+            required
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            placeholder="Type in your password."
+            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
+          />
+          <p
+            className={`font-bold ${
+              isBorder ? "text-green-500" : "text-red-500"
+            }`}
+          >
             I want to delete my account under username {currentUser.displayName}
           </p>
           <input
             type="text"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            className="w-full py-1 px-4 border border-2 border-red-500 bg-first border-first rounded-full"
+            value={deletionText}
+            onChange={(e) => {
+              const t = e.target.value;
+              setIsBorder(checkText(t, currentUser.displayName));
+              setDeletionText(t);
+            }}
+            className={`w-full py-1 px-4 border border-2 ${
+              isBorder
+                ? "border-green-500 active:ring-green-500 focus:ring-green-500"
+                : "border-red-500"
+            } bg-first rounded-full`}
           />
           <div className="flex gap-4">
             <button
@@ -433,7 +477,7 @@ export default function Profile() {
             </span>
 
             <div className="flex-1">
-              <p className="text-first text-sm">Failed to reset password</p>
+              <p className="text-first text-sm">{errorMessage}</p>
             </div>
 
             <button
@@ -695,16 +739,18 @@ export default function Profile() {
               </div>
             </div>
           </button>
-          <button
-            onClick={() => renderContent("password")}
-            className="w-full rounded-[15px] bg-first border border-2 border-third"
-          >
-            <div className="flex justify-between items-center p-4">
-              <p className="font-montserrat text-sm font-semibold text-third ">
-                Change Password
-              </p>
-            </div>
-          </button>
+          {isPassword && (
+            <button
+              onClick={() => renderContent("password")}
+              className="w-full rounded-[15px] bg-first border border-2 border-third"
+            >
+              <div className="flex justify-between items-center p-4">
+                <p className="font-montserrat text-sm font-semibold text-third ">
+                  Change Password
+                </p>
+              </div>
+            </button>
+          )}
           <button
             onClick={() => renderContent("delete")}
             className="w-full rounded-[15px] bg-first border border-2 border-third"
