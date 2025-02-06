@@ -16,9 +16,7 @@ import { updateProfile } from "firebase/auth";
 import theProfile from "../assets/img/pp.jpg";
 import { auth } from "../api/firebase";
 import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../api/context";
-import { doSignOut } from "../api/auth";
 
 export default function Profile() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -50,7 +48,6 @@ export default function Profile() {
 
   const user = auth.currentUser;
 
-  const navigate = useNavigate();
   const { currentUser } = useAuth();
 
   const handleClose = () => {
@@ -143,7 +140,7 @@ export default function Profile() {
 
   const renderUser = () => {
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4">
         <Description>Modify your Profile.</Description>
         <form>
           {usernameError && (
@@ -161,41 +158,32 @@ export default function Profile() {
               checkUsernameFunction(thename);
             }}
             placeholder="New Username"
-            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
+            className="w-full py-1 px-2 border border-2 border-third bg-first border-first rounded-xl placeholder-third"
           />
         </form>
         <form>
-          <input
-            type="textarea"
+          <textarea
+            rows="5"
             value={newBio}
             onChange={(e) => setNewBio(e.target.value)}
             placeholder="Bio"
-            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
+            className="h-24 w-full py-1 px-2 border border-2 border-third bg-first border-first rounded-xl placeholder-third"
           />
         </form>
-        <button className="flex items-center justify-center gap-2 bg-first border border-2 border-third font-montserrat font-semibold py-1 px-8 rounded-full hover:bg-third hover:text-first">
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M23 0v20h-8v-2h6v-16h-18v16h6v2h-8v-20h22zm-12 13h-4l5-6 5 6h-4v11h-2v-11z" />
-          </svg>
+        <button className="flex items-center justify-center gap-2 bg-second text-first font-alata py-1 px-8 rounded-xl hover:bg-third">
           Upload New Photo
         </button>
         <Description>Commit your changes below.</Description>
         <div className="flex gap-4">
           <button
             onClick={() => closeDialog()}
-            className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+            className="bg-second font-alata px-8 rounded-xl hover:bg-third text-first"
           >
             Cancel
           </button>
           <button
             onClick={() => changeProfile()}
-            className="bg-first border border-2 border-third font-semibold py-1 px-8 rounded-full hover:bg-third hover:text-first text-sm"
+            className="bg-second font-alata py-1 px-8 rounded-xl hover:bg-third text-first"
           >
             Save Changes
           </button>
@@ -206,7 +194,7 @@ export default function Profile() {
 
   const renderStats = () => {
     return (
-      <div className="flex flex-col gap-2 font-montserrat">
+      <div className="flex flex-col gap-4 font-montserrat">
         <div>
           <p>
             Streak: <span className="font-semibold">{streak}</span>
@@ -219,7 +207,7 @@ export default function Profile() {
         <div className="flex">
           <button
             onClick={() => closeDialog()}
-            className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+            className="bg-second font-semibold py-1 px-8 rounded-xl hover:bg-third text-first text-sm"
           >
             Close
           </button>
@@ -230,19 +218,19 @@ export default function Profile() {
 
   const renderRequests = () => {
     return (
-      <div>
+      <div className="flex flex-col gap-4">
         <ul>
           <li>
             <span>Name Here </span>
-            <button className="ml-4 px-4 border border-2 border-third rounded-full hover:bg-third hover:text-first text-sm">
-              accept
+            <button className="ml-4 px-4 bg-second py-1 rounded-xl hover:bg-third font-alata text-first text-sm">
+              accept request
             </button>
           </li>
         </ul>
-        <div className="flex mt-2">
+        <div className="flex">
           <button
             onClick={() => closeDialog()}
-            className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+            className="bg-second font-alata py-1 px-8 rounded-xl hover:bg-third text-first text-sm"
           >
             Close
           </button>
@@ -253,19 +241,19 @@ export default function Profile() {
 
   const renderFriends = () => {
     return (
-      <div>
+      <div className="flex flex-col gap-4">
         <ul>
           <li>
             <span>Name Here </span>
-            <button className="ml-4 px-4 border border-2 border-third rounded-full hover:bg-third hover:text-first text-sm">
+            <button className="font-alata ml-4 py-1 px-4 bg-second rounded-xl hover:bg-third text-first text-sm">
               unfriend
             </button>
           </li>
         </ul>
-        <div className="flex mt-2">
+        <div className="flex">
           <button
             onClick={() => closeDialog()}
-            className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+            className="bg-second py-1 px-8 font-alata rounded-xl hover:bg-third text-first text-sm"
           >
             Close
           </button>
@@ -276,7 +264,7 @@ export default function Profile() {
 
   const renderSessions = () => {
     return (
-      <div>
+      <div className="flex flex-col gap-4">
         <ul>
           <li className="flex gap-2">
             <span>18th Jan, 2025</span>
@@ -291,10 +279,10 @@ export default function Profile() {
             <span>12:42:06</span>
           </li>
         </ul>
-        <div className="flex mt-2">
+        <div className="flex">
           <button
             onClick={() => closeDialog()}
-            className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+            className="bg-second py-1 px-8 font-alata rounded-xl hover:bg-third text-first text-sm"
           >
             Close
           </button>
@@ -305,9 +293,9 @@ export default function Profile() {
 
   const renderPassword = () => {
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4">
         <Description>Change your Password here.</Description>
-        <form className="flex flex-col gap-2" onSubmit={handlePasswordChange}>
+        <form className="flex flex-col gap-4" onSubmit={handlePasswordChange}>
           {passwordError && (
             <span className="text-red-600 text-sm">Incorrect Password.</span>
           )}
@@ -316,25 +304,25 @@ export default function Profile() {
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             placeholder="Old Password"
-            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
+            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-xl placeholder-third"
           />
           <input
             type="password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             placeholder="New Password"
-            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
+            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-xl placeholder-third"
           />
           <div className="flex gap-4">
             <button
               onClick={() => closeDialog()}
-              className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+              className="bg-second font-alata py-1 px-8 rounded-xl hover:bg-third text-first text-sm"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-first border border-2 border-third font-semibold py-1 px-8 rounded-full hover:bg-third hover:text-first text-sm"
+              className="bg-second font-alata py-1 px-8 rounded-xl hover:bg-third text-first text-sm"
             >
               Change
             </button>
@@ -362,7 +350,7 @@ export default function Profile() {
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             placeholder="Type in your password."
-            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-full placeholder-third"
+            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-xl placeholder-third"
           />
           <p
             className={`font-bold ${
@@ -383,18 +371,18 @@ export default function Profile() {
               isBorder
                 ? "border-green-500 active:ring-green-500 focus:ring-green-500"
                 : "border-red-500"
-            } bg-first rounded-full`}
+            } bg-first rounded-xl`}
           />
           <div className="flex gap-4">
             <button
               onClick={() => closeDialog()}
-              className="bg-first border border-2 border-third font-semibold px-8 rounded-full hover:bg-third hover:text-first text-sm"
+              className="bg-first border border-2 border-third font-semibold px-8 rounded-xl hover:bg-third hover:text-first text-sm"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-first border border-2 border-third font-semibold py-1 px-8 rounded-full hover:bg-red-500 hover:border-red-500 hover:text-first text-sm"
+              className="bg-first border border-2 border-third font-semibold py-1 px-8 rounded-xl hover:bg-red-500 hover:border-red-500 hover:text-first text-sm"
             >
               Delete
             </button>
@@ -565,9 +553,9 @@ export default function Profile() {
                   width="35"
                   height="35"
                   alt="the valediktoria logo"
-                  className="rounded-full"
+                  className="rounded-xl"
                 />
-                <div className=" text-third font-montserrat font-semibold font-medium rounded-full bg-first">
+                <div className=" text-third font-montserrat font-semibold font-medium rounded-xl bg-first">
                   {currentUser.displayName
                     ? currentUser.displayName
                     : currentUser.email}
@@ -576,13 +564,14 @@ export default function Profile() {
 
               <button
                 onClick={() => renderContent("edit")}
-                className="text-third hover:text-second text-semibold"
+                className="text-second hover:text-second text-semibold"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="14"
                   height="14"
                   viewBox="0 0 24 24"
+                  fill="currentColor"
                 >
                   <path d="M7.127 22.564l-7.126 1.436 1.438-7.125 5.688 5.689zm-4.274-7.104l5.688 5.689 15.46-15.46-5.689-5.689-15.459 15.46z" />
                 </svg>
@@ -609,7 +598,7 @@ export default function Profile() {
               <div className="font-montserrat text-sm font-semibold text-third ">
                 Nyareki Gospel
               </div>
-              <p className="text-xs text-first px-2 py-1 font-montserrat font-medium bg-second rounded-full">
+              <p className="text-xs text-first px-2 py-1 font-alata font-medium bg-third rounded-xl">
                 {currentUser.emailVerified ? "verified" : "not verified"}
               </p>
             </div>
@@ -627,7 +616,7 @@ export default function Profile() {
               <div className="font-montserrat text-sm font-semibold text-third ">
                 Bio
               </div>
-              <p className="text-xs text-first px-2 py-1 font-montserrat font-medium bg-second rounded-full">
+              <p className="text-xs text-first px-2 py-1 font-montserrat font-medium bg-third rounded-xl">
                 Pharmacist
               </p>
             </div>
@@ -675,7 +664,7 @@ export default function Profile() {
                       viewBox="0 0 24 24"
                       fill="currentColor"
                     >
-                      <path d="M18.926 5.722c-.482 1.41-.484 1.139 0 2.555.051.147.074.297.074.445 0 .449-.222.883-.615 1.156-1.256.87-1.09.651-1.562 2.067-.198.591-.77.99-1.414.99h-.004c-1.549-.005-1.279-.088-2.528.789-.262.184-.569.276-.877.276s-.615-.092-.876-.275c-1.249-.878-.98-.794-2.528-.789h-.004c-.645 0-1.216-.399-1.413-.99-.473-1.417-.311-1.198-1.562-2.067-.395-.274-.617-.708-.617-1.157 0-.148.024-.298.074-.444.483-1.411.484-1.139 0-2.555-.05-.147-.074-.297-.074-.445 0-.45.222-.883.616-1.157 1.251-.868 1.089-.648 1.562-2.067.197-.591.769-.99 1.413-.99h.004c1.545.005 1.271.095 2.528-.79.262-.183.569-.274.877-.274s.615.091.876.274c1.249.878.98.795 2.528.79h.004c.645 0 1.216.399 1.414.99.473 1.416.307 1.197 1.562 2.067.394.273.616.707.616 1.156 0 .148-.023.299-.074.445zm-2.926 1.278c0-2.209-1.791-4-4-4s-4 1.791-4 4 1.791 4 4 4 4-1.792 4-4zm-4 9c-1.156 0-1.707-.418-2.537-1h-1.463v9l4.042-3 3.958 3v-9h-1.5c-.62.585-1.525 1-2.5 1z" />
+                      <path d="M18.892 6.005c-.698 6.474-4.58 10.865-6.892 12.945v-14.95c2.182 0 4.781.769 6.892 2.005zm4.108-2.005c0 8.578-5.071 16.1-11 20-5.929-3.9-11-11.422-11-20 2.828-2.329 7.162-4 11-4 3.847 0 8.172 1.671 11 4zm-2.023.971c-2.544-1.8-6.035-2.971-8.977-2.971s-6.433 1.171-8.977 2.971c.356 7.492 4.783 13.384 8.977 16.578 4.194-3.194 8.621-9.086 8.977-16.578z" />
                     </svg>
                   </div>
                   <p className="font-montserrat font-semibold text-sm text-center">
@@ -693,7 +682,7 @@ export default function Profile() {
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Friend Requests
               </p>
-              <p className="bg-second py-1 px-2 font-montserrattext-xs text-first rounded-full">
+              <p className="bg-third py-1 px-2 font-montserrat text-xs text-first rounded-xl">
                 0
               </p>
             </div>
@@ -706,7 +695,7 @@ export default function Profile() {
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Friends
               </p>
-              <p className="bg-second py-1 px-2 font-montserrat text-xs text-first rounded-full">
+              <p className="bg-third py-1 px-2 font-montserrat text-xs text-first rounded-xl">
                 14
               </p>
             </div>
@@ -721,8 +710,8 @@ export default function Profile() {
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Attended Sessions
               </p>
-              <div className="flex justify-center gap-1 items-center">
-                <div className="text-second">
+              <div className="flex justify-center gap-2 items-center">
+                <div className="text-third">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
@@ -751,7 +740,7 @@ export default function Profile() {
               </div>
             </button>
           )}
-          <button
+          {/* <button
             onClick={() => renderContent("delete")}
             className="w-full rounded-[15px] bg-first border border-2 border-third"
           >
@@ -771,7 +760,7 @@ export default function Profile() {
                 </svg>
               </div>
             </div>
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

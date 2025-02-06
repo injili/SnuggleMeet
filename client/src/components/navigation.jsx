@@ -1,10 +1,12 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import theLogo from "../assets/img/icon.png";
 import { useAuth } from "../api/context";
+import { doSignOut } from "../api/auth";
 
 export default function Navigation() {
   const { currentUser } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const checkLocation = () => {
     if (location.pathname === "/") {
@@ -35,7 +37,16 @@ export default function Navigation() {
           <h1 className="text-2xl font-montserrat font-semibold ">
             Your Profile
           </h1>
-          <button>Log Out</button>
+          <button
+            onClick={() => {
+              doSignOut().then(() => {
+                navigate("/");
+              });
+            }}
+            className="bg-second text-first px-8 py-1 rounded-xl hover:bg-third font-alata"
+          >
+            Log Out
+          </button>
         </div>
       );
     } else if (location.pathname == "/oprofile") {

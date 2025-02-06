@@ -62,7 +62,7 @@ export const deleteAccount = async (pass) => {
       await reauthenticate(pass);
       await deleteUser(user);
     } catch (error) {
-      throw error;
+      return error;
     }
   }
 };
