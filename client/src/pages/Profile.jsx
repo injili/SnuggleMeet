@@ -158,7 +158,7 @@ export default function Profile() {
               checkUsernameFunction(thename);
             }}
             placeholder="New Username"
-            className="w-full py-1 px-2 border border-2 border-third bg-first border-first rounded-xl placeholder-third"
+            className="w-full py-1 px-2 border border-third bg-first border-first rounded-xl placeholder-third"
           />
         </form>
         <form>
@@ -167,7 +167,7 @@ export default function Profile() {
             value={newBio}
             onChange={(e) => setNewBio(e.target.value)}
             placeholder="Bio"
-            className="h-24 w-full py-1 px-2 border border-2 border-third bg-first border-first rounded-xl placeholder-third"
+            className="h-24 w-full py-1 px-2 border border-third bg-first border-first rounded-xl placeholder-third"
           />
         </form>
         <button className="flex items-center justify-center gap-2 bg-second text-first font-alata py-1 px-8 rounded-xl hover:bg-third">
@@ -304,14 +304,14 @@ export default function Profile() {
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             placeholder="Old Password"
-            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-xl placeholder-third"
+            className="w-full py-1 px-4 border border-third bg-first border-first rounded-xl placeholder-third"
           />
           <input
             type="password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             placeholder="New Password"
-            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-xl placeholder-third"
+            className="w-full py-1 px-4 border border-third bg-first border-first rounded-xl placeholder-third"
           />
           <div className="flex gap-4">
             <button
@@ -350,7 +350,7 @@ export default function Profile() {
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             placeholder="Type in your password."
-            className="w-full py-1 px-4 border border-2 border-third bg-first border-first rounded-xl placeholder-third"
+            className="w-full py-1 px-4 border border-third bg-first border-first rounded-xl placeholder-third"
           />
           <p
             className={`font-bold ${
@@ -367,7 +367,7 @@ export default function Profile() {
               setIsBorder(checkText(t, currentUser.displayName));
               setDeletionText(t);
             }}
-            className={`w-full py-1 px-4 border border-2 ${
+            className={`w-full py-1 px-4 border ${
               isBorder
                 ? "border-green-500 active:ring-green-500 focus:ring-green-500"
                 : "border-red-500"
@@ -376,13 +376,13 @@ export default function Profile() {
           <div className="flex gap-4">
             <button
               onClick={() => closeDialog()}
-              className="bg-first border border-2 border-third font-semibold px-8 rounded-xl hover:bg-third hover:text-first text-sm"
+              className="bg-first border border-third font-semibold px-8 rounded-xl hover:bg-third hover:text-first text-sm"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-first border border-2 border-third font-semibold py-1 px-8 rounded-xl hover:bg-red-500 hover:border-red-500 hover:text-first text-sm"
+              className="bg-first border border-third font-semibold py-1 px-8 rounded-xl hover:bg-red-500 hover:border-red-500 hover:text-first text-sm"
             >
               Delete
             </button>
@@ -545,7 +545,7 @@ export default function Profile() {
       )}
       <div className="w-full grid grid-cols-2 gap-4 ">
         <div className="flex flex-col gap-4 justify-start">
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+          <div className="w-full rounded-[15px] bg-first border border-third">
             <div className="flex justify-between items-center p-4">
               <div className="flex items-center gap-4">
                 <img
@@ -593,8 +593,8 @@ export default function Profile() {
               </Dialog>
             </div>
           </div>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
-            <div className="flex justify-between items-center m-4 pb-4 border-b-2 border-third">
+          <div className="w-full rounded-[15px] bg-first border border-third">
+            <div className="flex justify-between items-center m-4 pb-4 border-b border-third">
               <div className="font-montserrat text-sm font-semibold text-third ">
                 Nyareki Gospel
               </div>
@@ -611,8 +611,8 @@ export default function Profile() {
               </p>
             </div>
           </div>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
-            <div className="flex justify-between items-center m-4 pb-4 border-b-2 border-third">
+          <div className="w-full rounded-[15px] bg-first border border-third">
+            <div className="flex justify-between items-center m-4 pb-4 border-b border-third">
               <div className="font-montserrat text-sm font-semibold text-third ">
                 Bio
               </div>
@@ -632,7 +632,7 @@ export default function Profile() {
         <div className="flex flex-col gap-4 justify-start">
           <button
             onClick={() => renderContent("stats")}
-            className="w-full rounded-[15px] bg-first border border-2 border-third"
+            className="w-full rounded-[15px] bg-first border border-third"
           >
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
@@ -676,7 +676,7 @@ export default function Profile() {
           </button>
           <button
             onClick={() => renderContent("requests")}
-            className="w-full rounded-[15px] bg-first border border-2 border-third"
+            className="w-full rounded-[15px] bg-first border border-third"
           >
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
@@ -689,7 +689,7 @@ export default function Profile() {
           </button>
           <button
             onClick={() => renderContent("friends")}
-            className="w-full rounded-[15px] bg-first border border-2 border-third"
+            className="w-full rounded-[15px] bg-first border border-third"
           >
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
@@ -704,7 +704,7 @@ export default function Profile() {
             onClick={() => {
               renderContent("sessions");
             }}
-            className="w-full rounded-[15px] bg-first border border-2 border-third"
+            className="w-full rounded-[15px] bg-first border border-third"
           >
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
@@ -731,7 +731,7 @@ export default function Profile() {
           {isPassword && (
             <button
               onClick={() => renderContent("password")}
-              className="w-full rounded-[15px] bg-first border border-2 border-third"
+              className="w-full rounded-[15px] bg-first border border-third"
             >
               <div className="flex justify-between items-center p-4">
                 <p className="font-montserrat text-sm font-semibold text-third ">
@@ -742,7 +742,7 @@ export default function Profile() {
           )}
           {/* <button
             onClick={() => renderContent("delete")}
-            className="w-full rounded-[15px] bg-first border border-2 border-third"
+            className="w-full rounded-[15px] bg-first border border-third"
           >
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">

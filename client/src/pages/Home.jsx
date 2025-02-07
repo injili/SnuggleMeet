@@ -17,7 +17,7 @@ export default function Home() {
         <div className="flex items-center w-full gap-4 justify-between">
           <div className="w-full rounded-[15px] bg-second">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
-              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-full bg-first">
+              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
                 12 participants
               </div>
               <p className="text-xl text-first font-alata">Room A</p>
@@ -32,7 +32,7 @@ export default function Home() {
                 onClick={() => {
                   navigate("/room");
                 }}
-                className="py-1 bg-first rounded-full text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first "
+                className="py-1 bg-first rounded-xl text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first "
               >
                 Join
               </button>
@@ -40,7 +40,7 @@ export default function Home() {
           </div>
           <div className="w-full rounded-[15px] bg-third">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
-              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-full bg-first">
+              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
                 Full
               </div>
               <p className="text-xl text-first font-alata">Room B</p>
@@ -55,7 +55,7 @@ export default function Home() {
         <div className="flex items-center w-full gap-4 justify-between">
           <div className="w-full rounded-[15px] bg-second">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
-              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-full bg-first">
+              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
                 4 participants
               </div>
               <p className="text-xl text-first font-alata">Kastomaa</p>
@@ -64,14 +64,14 @@ export default function Home() {
               <p className="text-xs py-1 text-first font-medium font-montserrat">
                 injili, tweet, scale, trees
               </p>
-              <button className="py-1 bg-first rounded-full text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first">
+              <button className="py-1 bg-first rounded-xl text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first">
                 Join
               </button>
             </div>
           </div>
           <div className="w-full rounded-[15px] bg-second">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
-              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-full bg-first">
+              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
                 10 participants
               </div>
               <p className="text-xl text-first font-alata">Kristals</p>
@@ -80,13 +80,13 @@ export default function Home() {
               <p className="text-xs py-1 text-first font-medium font-montserrat">
                 injili, tweet, scale, trees
               </p>
-              <button className="py-1 bg-first rounded-full text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first">
+              <button className="py-1 bg-first rounded-xl text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first">
                 Join
               </button>
             </div>
           </div>
         </div>
-        <button className="py-1 w-2/6 flex items-center justify-center gap-2 bg-first rounded-full text-third text-sm font-montserrat font-semibold hover:bg-third hover:text-first border border-2 border-third">
+        <button className="py-1 w-2/6 flex items-center justify-center gap-2 rounded-xl text-sm font-montserrat font-semibold hover:bg-third text-first bg-second">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="8"

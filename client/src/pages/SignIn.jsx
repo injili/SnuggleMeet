@@ -78,7 +78,7 @@ export default function SignIn() {
             setEmail(t);
             checkEmail(t);
           }}
-          className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
+          className="w-full py-1 px-4 border bg-first border-third rounded-xl"
         />
         <input
           type="password"
@@ -88,7 +88,7 @@ export default function SignIn() {
           onChange={(e) => {
             setPassword(e.target.value);
           }}
-          className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
+          className="w-full py-1 px-4 border bg-first border-third rounded-xl"
         />
         {/* {errorMessage && (
           <div
@@ -153,7 +153,7 @@ export default function SignIn() {
         <button
           type="submit"
           disabled={isSigningIn}
-          className="py-2 text-first font-alata px-16 bg-second rounded-full text-sm hover:bg-third w-max"
+          className="py-2 text-first font-alata px-16 bg-second rounded-xl text-sm hover:bg-third w-max"
         >
           {isSigningIn ? "Signing In..." : "Sign In"}
         </button>
@@ -165,7 +165,7 @@ export default function SignIn() {
           onClick={(e) => {
             onGoogleSignIn(e);
           }}
-          className="py-2 bg-second rounded-full text-first text-sm hover:bg-third px-16 "
+          className="py-2 bg-second rounded-xl text-first text-sm hover:bg-third px-16 "
         >
           {isSigningIn ? "Signing In..." : "Sign In with Google"}
         </button>

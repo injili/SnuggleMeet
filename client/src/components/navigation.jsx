@@ -58,12 +58,12 @@ export default function Navigation() {
     }
   };
   return (
-    <div className="border-third border-b-2 mx-4 flex items-center gap-4 py-4">
+    <div className="border-third border-b mx-4 flex items-center gap-4 py-4">
       <Link to="/home">
         <img
           src={theLogo}
-          width="65"
-          height="65"
+          width="50"
+          height="50"
           alt="the valediktoria logo"
           className="rounded-md"
         />

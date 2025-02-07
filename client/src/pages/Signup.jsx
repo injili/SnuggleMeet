@@ -148,7 +148,7 @@ export default function Signup() {
             minLength={2}
             max={25}
             placeholder="First Name"
-            className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
           />
           <input
             type="text"
@@ -161,7 +161,7 @@ export default function Signup() {
             minLength={2}
             max={25}
             placeholder="Last Name"
-            className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
           />
         </div>
         {usernameError && (
@@ -188,7 +188,7 @@ export default function Signup() {
             minLength={2}
             max={25}
             placeholder="Username"
-            className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
           />
           <input
             type="email"
@@ -201,7 +201,7 @@ export default function Signup() {
               checkEmail(t);
             }}
             placeholder="Email Address"
-            className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
           />
         </div>
 
@@ -214,7 +214,7 @@ export default function Signup() {
           }}
           placeholder="Date of Birth"
           max={getMaxDate()}
-          className="w-1/2 py-1 px-4 border border-2 bg-first border-third rounded-full"
+          className="w-1/2 py-1 px-4 border bg-first border-third rounded-xl"
         />
         {passwordError && (
           <span className="text-red-600 text-sm">
@@ -239,7 +239,7 @@ export default function Signup() {
               setPassword(p);
               checkPassword(p);
             }}
-            className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
           />
 
           <input
@@ -254,7 +254,7 @@ export default function Signup() {
               setconfirmPassword(p);
               checkSimilarity(p);
             }}
-            className="w-full py-1 px-4 border border-2 bg-first border-third rounded-full"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
           />
         </div>
 
@@ -310,7 +310,7 @@ export default function Signup() {
         <button
           type="submit"
           disabled={isRegistering}
-          className="text-first font-alata py-2 px-16 bg-second hover:bg-third rounded-full w-max text-sm"
+          className="text-first font-alata py-2 px-16 bg-second hover:bg-third rounded-xl w-max text-sm"
         >
           {isRegistering ? "Signing Up..." : "Sign Up"}
         </button>
@@ -323,7 +323,7 @@ export default function Signup() {
           onClick={(e) => {
             onGoogleSignIn(e);
           }}
-          className="py-2 bg-second text-sm rounded-full text-first hover:bg-third px-16 "
+          className="py-2 bg-second text-sm rounded-xl text-first hover:bg-third px-16 "
         >
           {isSigningIn ? "Signing In..." : "Sign In with Google"}
         </button>
