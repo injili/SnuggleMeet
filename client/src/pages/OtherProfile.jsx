@@ -65,7 +65,7 @@ export default function OtherProfile() {
       {!currentUser.emailVerified && (
         <Navigate to={"/verification"} replace={true} />
       )}
-      <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+      <div className="w-full rounded-[15px] bg-first border border-third">
         <div className="flex justify-between items-center p-4">
           <div className="flex items-center gap-4">
             <img
@@ -93,7 +93,7 @@ export default function OtherProfile() {
             </div>
           </div>
 
-          <button className="py-1 px-4 flex items-center justify-center gap-2 bg-first rounded-xl text-third text-sm font-montserrat font-semibold hover:bg-third hover:text-first border border-2 border-third">
+          <button className="py-1 px-4 flex items-center justify-center gap-2 bg-first rounded-xl text-third text-sm font-montserrat font-semibold hover:bg-third hover:text-first border border-third">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -109,8 +109,8 @@ export default function OtherProfile() {
       </div>
       <div className="w-full grid grid-cols-2 gap-4 ">
         <div className="flex flex-col gap-4 justify-start">
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
-            <div className="flex justify-between items-center m-4 pb-4 border-b-2 border-third">
+          <div className="w-full rounded-[15px] bg-first border border-third">
+            <div className="flex justify-between items-center m-4 pb-4 border-b border-third">
               <div className="font-montserrat text-sm font-semibold text-third ">
                 Bio
               </div>
@@ -128,7 +128,7 @@ export default function OtherProfile() {
           </div>
         </div>
         <div className="flex flex-col gap-4 justify-start">
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+          <div className="w-full rounded-[15px] bg-first border border-third">
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Stats
@@ -169,7 +169,7 @@ export default function OtherProfile() {
               </div>
             </div>
           </div>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+          <div className="w-full rounded-[15px] bg-first border border-third">
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Friends
@@ -179,7 +179,7 @@ export default function OtherProfile() {
               </p>
             </div>
           </div>
-          <div className="w-full rounded-[15px] bg-first border border-2 border-third">
+          <div className="w-full rounded-[15px] bg-first border border-third">
             <div className="flex justify-between items-center p-4">
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Current Room

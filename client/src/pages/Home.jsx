@@ -40,7 +40,7 @@ export default function Home() {
                 onClick={() => {
                   navigate("/room");
                 }}
-                className="py-1 bg-second rounded-xl text-first text-xs font-montserrat font-medium hover:bg-third px-8"
+                className="py-1 bg-second rounded-xl text-first text-xs font-montserrat font-semibold font-medium hover:bg-third px-8"
               >
                 Join
               </button>
@@ -68,12 +68,11 @@ export default function Home() {
                   injili, tweet, scale, trees
                 </p>
               </div>
-              <button className="py-1 bg-second rounded-xl text-xs font-montserrat font-medium hover:bg-third px-8 text-first">
+              <button className="py-1 bg-second rounded-xl text-xs font-montserrat font-semibold font-medium hover:bg-third px-8 text-first">
                 Join
               </button>
             </div>
           </div>
-
           <div className="w-full rounded-xl bg-third">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
               <div className="px-4 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
