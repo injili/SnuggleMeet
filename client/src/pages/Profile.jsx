@@ -17,6 +17,7 @@ import theProfile from "../assets/img/pp.jpg";
 import { auth } from "../api/firebase";
 import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
 import { useAuth } from "../api/context";
+import { Navigate } from "react-router-dom";
 
 export default function Profile() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -70,6 +71,7 @@ export default function Profile() {
       setErrorMessage("Please try again.");
     }
   };
+
   const handlePasswordChange = async (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -441,6 +443,10 @@ export default function Profile() {
 
   return (
     <div className=" z-60 flex flex-col gap-4 justify-center px-4 items-center">
+      {!currentUser && <Navigate to={"/"} replace={true} />}
+      {!currentUser.emailVerified && (
+        <Navigate to={"/verification"} replace={true} />
+      )}
       {errorMessage && (
         <div
           role="alert"

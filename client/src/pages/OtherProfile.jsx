@@ -4,7 +4,7 @@ import { doPasswordChange } from "../api/auth";
 import theProfile from "../assets/img/pp.jpg";
 import { auth } from "../api/firebase";
 import { reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../api/context";
 import { doSignOut } from "../api/auth";
 
@@ -61,6 +61,10 @@ export default function OtherProfile() {
 
   return (
     <div className=" flex flex-col gap-4 justify-center px-4 items-center">
+      {!currentUser && <Navigate to={"/"} replace={true} />}
+      {!currentUser.emailVerified && (
+        <Navigate to={"/verification"} replace={true} />
+      )}
       <div className="w-full rounded-[15px] bg-first border border-2 border-third">
         <div className="flex justify-between items-center p-4">
           <div className="flex items-center gap-4">
