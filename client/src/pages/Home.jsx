@@ -14,15 +14,15 @@ export default function Home() {
           Welcome to Valediktoria, what room would you like to join?
         </p>
         <div className="grid grid-cols-2 items-center w-full gap-4 justify-between">
-          <div className="w-full rounded-xl bg-second">
-            <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
-              <div className="px-4 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
+          <div className="w-full rounded-xl border border-third">
+            <div className="flex justify-between items-center m-4 pb-4 border-b border-third">
+              <div className="px-4 py-1 font-montserrat text-first text-xs font-medium rounded-xl bg-third">
                 12 participants
               </div>
-              <p className="text-xl text-first font-alata">Room A</p>
+              <p className="text-xl text-third font-alata">Room A</p>
             </div>
             <div className="flex justify-between items-center m-4">
-              <div className="flex gap-4 text-first items-center">
+              <div className="flex gap-4 text-second items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="6"
@@ -32,7 +32,7 @@ export default function Home() {
                 >
                   <circle cx="12" cy="12" r="12" />
                 </svg>
-                <p className="text-xs py-1 text-first font-medium font-montserrat">
+                <p className="text-xs py-1 text-third font-medium font-montserrat">
                   injili, tweet, scale, trees ...
                 </p>
               </div>
@@ -40,12 +40,40 @@ export default function Home() {
                 onClick={() => {
                   navigate("/room");
                 }}
-                className="py-1 bg-first rounded-xl text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first "
+                className="py-1 bg-second rounded-xl text-first text-xs font-montserrat font-medium hover:bg-third px-8"
               >
                 Join
               </button>
             </div>
           </div>
+          <div className="w-full rounded-xl border border-third">
+            <div className="flex justify-between items-center m-4 pb-4 border-b border-third">
+              <div className="px-4 py-1 font-montserrat text-first text-xs font-medium rounded-xl bg-third">
+                4 participants
+              </div>
+              <p className="text-xl text-third font-alata">Krystal</p>
+            </div>
+            <div className="flex justify-between items-center m-4">
+              <div className="flex gap-4 items-center text-second">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="6"
+                  height="6"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <circle cx="12" cy="12" r="12" />
+                </svg>
+                <p className="text-xs py-1 text-third font-medium font-montserrat">
+                  injili, tweet, scale, trees
+                </p>
+              </div>
+              <button className="py-1 bg-second rounded-xl text-xs font-montserrat font-medium hover:bg-third px-8 text-first">
+                Join
+              </button>
+            </div>
+          </div>
+
           <div className="w-full rounded-xl bg-third">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
               <div className="px-4 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
@@ -53,7 +81,7 @@ export default function Home() {
               </div>
               <p className="text-xl text-first font-alata">Room B</p>
             </div>
-            <div className="flex gap-4 items-center text-first m-4">
+            <div className="flex gap-4 items-center text-second m-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="6"
@@ -66,33 +94,6 @@ export default function Home() {
               <p className="text-xs py-1 text-first font-medium font-montserrat">
                 tress, tando, dimple, sweep ...
               </p>
-            </div>
-          </div>
-          <div className="w-full rounded-xl bg-second">
-            <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
-              <div className="px-4 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
-                4 participants
-              </div>
-              <p className="text-xl text-first font-alata">Krystal</p>
-            </div>
-            <div className="flex justify-between items-center m-4">
-              <div className="flex gap-4 items-center text-first">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="6"
-                  height="6"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <circle cx="12" cy="12" r="12" />
-                </svg>
-                <p className="text-xs py-1 text-first font-medium font-montserrat">
-                  injili, tweet, scale, trees
-                </p>
-              </div>
-              <button className="py-1 bg-first rounded-xl text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first">
-                Join
-              </button>
             </div>
           </div>
         </div>
