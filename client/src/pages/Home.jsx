@@ -1,12 +1,19 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../api/context";
+import {
+  Description,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
+
 export default function Home() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   return (
-    <div className="">
+    <div>
       {!currentUser && <Navigate to={"/"} replace={true} />}
-      {!currentUser.emailVerified && (
+      {currentUser && !currentUser.emailVerified && (
         <Navigate to={"/verification"} replace={true} />
       )}
       <div className="h-full p-4 flex flex-col gap-4 justify-center ">
@@ -97,16 +104,7 @@ export default function Home() {
           </div>
         </div>
         <div className="grid grid-cols-2 items-center w-full gap-4 justify-between">
-          <button className="py-1 w-full flex items-center justify-center gap-2 rounded-xl text-sm font-montserrat font-semibold hover:bg-third text-first bg-second">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="8"
-              height="8"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
-            </svg>
+          <button className="py-1 w-full rounded-xl text-sm font-montserrat font-semibold hover:bg-third text-first bg-second">
             Create Room
           </button>
         </div>

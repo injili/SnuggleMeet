@@ -106,6 +106,7 @@ export default function Signup() {
       setEmailError(false);
     }
   };
+
   const checkPassword = (thePassword) => {
     const strongPasswordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -123,20 +124,18 @@ export default function Signup() {
       setConfirmationPasswordError(false);
     }
   };
+
   return (
-    <div className="flex flex-col gap-2 justify-center px-4">
+    <div className="flex flex-col  gap-4 justify-center px-4">
       {userLoggedIn && <Navigate to={"/verification"} replace={true} />}
-      <p
-        className="mb-4 mt-2 font-montserrat
-      "
-      >
-        Welcome to Valediktoria. Log into your account here.
+      <p className="mb-4 mt-2 font-montserrat">
+        Welcome to Valediktoria. Sign Up for an account here.
       </p>
       <form
         onSubmit={onSubmit}
-        className="flex font-montserrat flex-col justify-center gap-2"
+        className="flex font-montserrat flex-col justify-center  gap-4"
       >
-        <div className="flex w-full gap-2 items-center justify-center">
+        <div className="flex w-full  gap-4 items-center justify-center">
           <input
             type="text"
             pattern="[^ ]+"
@@ -148,7 +147,7 @@ export default function Signup() {
             minLength={2}
             max={25}
             placeholder="First Name"
-            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl placeholder-third"
           />
           <input
             type="text"
@@ -161,7 +160,7 @@ export default function Signup() {
             minLength={2}
             max={25}
             placeholder="Last Name"
-            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl placeholder-third"
           />
         </div>
         {usernameError && (
@@ -174,7 +173,7 @@ export default function Signup() {
             The email is invalid and might have spaces.
           </span>
         )}
-        <div className="flex w-full gap-2 items-center justify-center">
+        <div className="flex w-full  gap-4 items-center justify-center">
           <input
             type="text"
             pattern="[^ ]+"
@@ -188,7 +187,7 @@ export default function Signup() {
             minLength={2}
             max={25}
             placeholder="Username"
-            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl placeholder-third"
           />
           <input
             type="email"
@@ -201,7 +200,7 @@ export default function Signup() {
               checkEmail(t);
             }}
             placeholder="Email Address"
-            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl placeholder-third"
           />
         </div>
 
@@ -214,7 +213,7 @@ export default function Signup() {
           }}
           placeholder="Date of Birth"
           max={getMaxDate()}
-          className="w-1/2 py-1 px-4 border bg-first border-third rounded-xl"
+          className="py-1 px-4 border bg-first border-third rounded-xl placeholder-third"
         />
         {passwordError && (
           <span className="text-red-600 text-sm">
@@ -226,7 +225,7 @@ export default function Signup() {
             This passwords are not similar.
           </span>
         )}
-        <div className="flex w-full gap-2 items-center justify-center">
+        <div className="flex w-full  gap-4 items-center justify-center">
           <input
             disabled={isRegistering}
             type="password"
@@ -239,7 +238,7 @@ export default function Signup() {
               setPassword(p);
               checkPassword(p);
             }}
-            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl placeholder-third"
           />
 
           <input
@@ -254,7 +253,7 @@ export default function Signup() {
               setconfirmPassword(p);
               checkSimilarity(p);
             }}
-            className="w-full py-1 px-4 border bg-first border-third rounded-xl"
+            className="w-full py-1 px-4 border bg-first border-third rounded-xl placeholder-third"
           />
         </div>
 
@@ -310,7 +309,7 @@ export default function Signup() {
         <button
           type="submit"
           disabled={isRegistering}
-          className="text-first font-alata py-2 px-16 bg-second hover:bg-third rounded-xl w-max text-sm"
+          className="text-first font-montserrat font-semibold py-1 px-16 bg-second hover:bg-third rounded-xl w-max text-sm"
         >
           {isRegistering ? "Signing Up..." : "Sign Up"}
         </button>
@@ -323,7 +322,7 @@ export default function Signup() {
           onClick={(e) => {
             onGoogleSignIn(e);
           }}
-          className="py-2 bg-second text-sm rounded-xl text-first hover:bg-third px-16 "
+          className="py-1 font-montserrat font-semibold bg-second text-sm rounded-xl text-first hover:bg-third px-16 "
         >
           {isSigningIn ? "Signing In..." : "Sign In with Google"}
         </button>

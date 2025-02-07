@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import theLogo from "../assets/img/icon.png";
 import { useAuth } from "../api/context";
 import { doSignOut } from "../api/auth";
@@ -17,17 +17,21 @@ export default function Navigation() {
       );
     } else if (location.pathname === "/signup") {
       return (
-        <h1 className="text-3xl font-montserrat font-semibold ">
+        <h1 className="text-2xl font-montserrat font-semibold ">
           Sign Up Page
         </h1>
       );
     } else if (location.pathname === "/home") {
       return (
-        <Link to="/oprofile">
+        <Link to="/profile">
           <h1 className="text-3xl font-montserrat font-semibold ">
-            {currentUser.displayName
-              ? currentUser.displayName
-              : currentUser.email}
+            {!currentUser && <Navigate to={"/"} replace={true} />}
+            {currentUser && !currentUser.emailVerified && (
+              <Navigate to={"/verification"} replace={true} />
+            )}
+            {currentUser
+              ? currentUser.displayName || currentUser.email
+              : "Guest"}
           </h1>
         </Link>
       );
@@ -43,13 +47,13 @@ export default function Navigation() {
                 navigate("/");
               });
             }}
-            className="bg-second text-first px-8 py-1 rounded-xl hover:bg-third font-alata"
+            className="bg-second text-first px-4 py-1 rounded-xl hover:bg-third font-montserrat font-semibold"
           >
             Log Out
           </button>
         </div>
       );
-    } else if (location.pathname == "/oprofile") {
+    } else if (location.pathname === "/oprofile") {
       return (
         <h1 className="text-2xl font-montserrat font-semibold ">
           View Profile

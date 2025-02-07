@@ -46,9 +46,7 @@ export default function Profile() {
 
   // Dialog Panel Variables
   const [title, setTitle] = useState("");
-
   const user = auth.currentUser;
-
   const { currentUser } = useAuth();
 
   const handleClose = () => {
@@ -559,7 +557,7 @@ export default function Profile() {
                   width="35"
                   height="35"
                   alt="the valediktoria logo"
-                  className="rounded-xl"
+                  className="rounded-full"
                 />
                 <div className=" text-third font-montserrat font-semibold font-medium rounded-xl bg-first">
                   {currentUser.displayName
@@ -644,39 +642,21 @@ export default function Profile() {
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Stats
               </p>
-              <div className="flex items-center gap-4">
-                <div className="flex flex-col justify-center gap-1 items-center">
-                  <div className="text-second">
-                    <svg
-                      width="15"
-                      height="15"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M8.625 0c.61 7.189-5.625 9.664-5.625 15.996 0 4.301 3.069 7.972 9 8.004 5.931.032 9-4.414 9-8.956 0-4.141-2.062-8.046-5.952-10.474.924 2.607-.306 4.988-1.501 5.808.07-3.337-1.125-8.289-4.922-10.378zm4.711 13c3.755 3.989 1.449 9-1.567 9-1.835 0-2.779-1.265-2.769-2.577.019-2.433 2.737-2.435 4.336-6.423z" />
-                    </svg>
-                  </div>
-                  <p className="font-montserrat font-semibold text-sm text-center">
-                    {streak}
-                  </p>
+              <div className="flex justify-center gap-2 items-center">
+                <div className="text-second">
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M8.625 0c.61 7.189-5.625 9.664-5.625 15.996 0 4.301 3.069 7.972 9 8.004 5.931.032 9-4.414 9-8.956 0-4.141-2.062-8.046-5.952-10.474.924 2.607-.306 4.988-1.501 5.808.07-3.337-1.125-8.289-4.922-10.378zm4.711 13c3.755 3.989 1.449 9-1.567 9-1.835 0-2.779-1.265-2.769-2.577.019-2.433 2.737-2.435 4.336-6.423z" />
+                  </svg>
                 </div>
-                <div className="flex flex-col justify-center gap-1 items-center">
-                  <div className="text-second">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="15"
-                      height="15"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M18.892 6.005c-.698 6.474-4.58 10.865-6.892 12.945v-14.95c2.182 0 4.781.769 6.892 2.005zm4.108-2.005c0 8.578-5.071 16.1-11 20-5.929-3.9-11-11.422-11-20 2.828-2.329 7.162-4 11-4 3.847 0 8.172 1.671 11 4zm-2.023.971c-2.544-1.8-6.035-2.971-8.977-2.971s-6.433 1.171-8.977 2.971c.356 7.492 4.783 13.384 8.977 16.578 4.194-3.194 8.621-9.086 8.977-16.578z" />
-                    </svg>
-                  </div>
-                  <p className="font-montserrat font-semibold text-sm text-center">
-                    {Leaderboard}
-                  </p>
-                </div>
+                <p className="font-montserrat font-semibold text-sm text-center">
+                  {streak}
+                </p>
               </div>
             </div>
           </button>
@@ -717,7 +697,7 @@ export default function Profile() {
                 Attended Sessions
               </p>
               <div className="flex justify-center gap-2 items-center">
-                <div className="text-third">
+                <div className="text-second">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
