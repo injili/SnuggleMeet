@@ -94,15 +94,6 @@ export default function OtherProfile() {
           </div>
 
           <button className="py-1 px-4 flex items-center justify-center gap-2 bg-first rounded-xl text-third text-sm font-montserrat font-semibold hover:bg-third hover:text-first border border-third">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M24 0l-6 22-8.129-7.239 7.802-8.234-10.458 7.227-7.215-1.754 24-12zm-15 16.668v7.332l3.258-4.431-3.258-2.901z" />
-            </svg>
             Send Friend Request
           </button>
         </div>
@@ -114,7 +105,7 @@ export default function OtherProfile() {
               <div className="font-montserrat text-sm font-semibold text-third ">
                 Bio
               </div>
-              <p className="text-xs text-first px-2 py-1 font-montserrat font-medium bg-second rounded-xl">
+              <p className="text-xs text-first  px-4 py-1 font-montserrat font-medium bg-second rounded-xl">
                 Pharmacist
               </p>
             </div>
@@ -134,11 +125,11 @@ export default function OtherProfile() {
                 Stats
               </p>
               <div className="flex items-center gap-4">
-                <div className="flex justify-center gap-1 items-center">
+                <div className="flex flex-col justify-center gap-1 items-center">
                   <div className="text-second">
                     <svg
-                      width="17"
-                      height="17"
+                      width="15"
+                      height="15"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       xmlns="http://www.w3.org/2000/svg"
@@ -150,20 +141,20 @@ export default function OtherProfile() {
                     122
                   </p>
                 </div>
-                <div className="flex justify-center gap-1 items-center">
+                <div className="flex flex-col justify-center gap-1 items-center">
                   <div className="text-second">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="17"
-                      height="17"
+                      width="15"
+                      height="15"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                     >
-                      <path d="M18.926 5.722c-.482 1.41-.484 1.139 0 2.555.051.147.074.297.074.445 0 .449-.222.883-.615 1.156-1.256.87-1.09.651-1.562 2.067-.198.591-.77.99-1.414.99h-.004c-1.549-.005-1.279-.088-2.528.789-.262.184-.569.276-.877.276s-.615-.092-.876-.275c-1.249-.878-.98-.794-2.528-.789h-.004c-.645 0-1.216-.399-1.413-.99-.473-1.417-.311-1.198-1.562-2.067-.395-.274-.617-.708-.617-1.157 0-.148.024-.298.074-.444.483-1.411.484-1.139 0-2.555-.05-.147-.074-.297-.074-.445 0-.45.222-.883.616-1.157 1.251-.868 1.089-.648 1.562-2.067.197-.591.769-.99 1.413-.99h.004c1.545.005 1.271.095 2.528-.79.262-.183.569-.274.877-.274s.615.091.876.274c1.249.878.98.795 2.528.79h.004c.645 0 1.216.399 1.414.99.473 1.416.307 1.197 1.562 2.067.394.273.616.707.616 1.156 0 .148-.023.299-.074.445zm-2.926 1.278c0-2.209-1.791-4-4-4s-4 1.791-4 4 1.791 4 4 4 4-1.792 4-4zm-4 9c-1.156 0-1.707-.418-2.537-1h-1.463v9l4.042-3 3.958 3v-9h-1.5c-.62.585-1.525 1-2.5 1z" />
+                      <path d="M18.892 6.005c-.698 6.474-4.58 10.865-6.892 12.945v-14.95c2.182 0 4.781.769 6.892 2.005zm4.108-2.005c0 8.578-5.071 16.1-11 20-5.929-3.9-11-11.422-11-20 2.828-2.329 7.162-4 11-4 3.847 0 8.172 1.671 11 4zm-2.023.971c-2.544-1.8-6.035-2.971-8.977-2.971s-6.433 1.171-8.977 2.971c.356 7.492 4.783 13.384 8.977 16.578 4.194-3.194 8.621-9.086 8.977-16.578z" />
                     </svg>
                   </div>
                   <p className="font-montserrat font-semibold text-sm text-center">
-                    122
+                    12
                   </p>
                 </div>
               </div>
@@ -174,7 +165,7 @@ export default function OtherProfile() {
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Friends
               </p>
-              <p className="bg-second py-1 px-2 font-montserrat text-xs text-first rounded-xl">
+              <p className="bg-second py-1  px-4 font-montserrat text-xs text-first rounded-xl">
                 14
               </p>
             </div>
@@ -184,7 +175,7 @@ export default function OtherProfile() {
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Current Room
               </p>
-              <p className="bg-second py-1 px-2 font-montserrat text-xs text-first rounded-xl">
+              <p className="bg-second py-1  px-4 font-montserrat text-xs text-first rounded-xl">
                 Powder
               </p>
             </div>

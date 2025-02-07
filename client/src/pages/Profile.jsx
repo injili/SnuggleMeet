@@ -645,11 +645,11 @@ export default function Profile() {
                 Stats
               </p>
               <div className="flex items-center gap-4">
-                <div className="flex justify-center gap-1 items-center">
+                <div className="flex flex-col justify-center gap-1 items-center">
                   <div className="text-second">
                     <svg
-                      width="17"
-                      height="17"
+                      width="15"
+                      height="15"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                       xmlns="http://www.w3.org/2000/svg"
@@ -661,12 +661,12 @@ export default function Profile() {
                     {streak}
                   </p>
                 </div>
-                <div className="flex justify-center gap-1 items-center">
+                <div className="flex flex-col justify-center gap-1 items-center">
                   <div className="text-second">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="17"
-                      height="17"
+                      width="15"
+                      height="15"
                       viewBox="0 0 24 24"
                       fill="currentColor"
                     >
