@@ -16,7 +16,7 @@ export default function Home() {
         <div className="grid grid-cols-2 items-center w-full gap-4 justify-between">
           <div className="w-full rounded-xl bg-second">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
-              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
+              <div className="px-4 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
                 12 participants
               </div>
               <p className="text-xl text-first font-alata">Room A</p>
@@ -48,7 +48,7 @@ export default function Home() {
           </div>
           <div className="w-full rounded-xl bg-third">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
-              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
+              <div className="px-4 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
                 Full
               </div>
               <p className="text-xl text-first font-alata">Room B</p>
@@ -70,7 +70,7 @@ export default function Home() {
           </div>
           <div className="w-full rounded-xl bg-second">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
-              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
+              <div className="px-4 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
                 4 participants
               </div>
               <p className="text-xl text-first font-alata">Krystal</p>
