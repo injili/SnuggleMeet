@@ -6,16 +6,55 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
+import { useState } from "react";
 
 export default function Home() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div>
       {!currentUser && <Navigate to={"/"} replace={true} />}
       {currentUser && !currentUser.emailVerified && (
         <Navigate to={"/verification"} replace={true} />
       )}
+      <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="relative z-50"
+      >
+        <div className="fixed inset-0 z-10 flex w-screen items-center justify-center p-4 bg-opacity-70 bg-blur-2xl bg-third">
+          <DialogPanel className="font-montserrat w-full max-w-lg space-y-4 bg-first text-third p-8 rounded-[15px]">
+            <DialogTitle className="font-semibold font-montserrat text-xl">
+              Create Room
+            </DialogTitle>
+            <input
+              type="text"
+              pattern="[^ ]+"
+              minLength={2}
+              max={25}
+              placeholder="Room Name"
+              className="w-full py-1 px-4 border bg-first border-third rounded-xl placeholder-third"
+            />
+            <div className="flex gap-4">
+              <button className="py-1 w-full rounded-xl text-sm font-montserrat font-semibold hover:bg-third text-first bg-second">
+                Share Link
+              </button>
+
+              <button className="py-1 w-full rounded-xl text-sm font-montserrat font-semibold hover:bg-third text-first bg-second">
+                Join Room
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="py-1 w-full rounded-xl text-sm font-montserrat font-semibold hover:bg-third text-first bg-second"
+              >
+                Cancel
+              </button>
+            </div>
+          </DialogPanel>
+        </div>
+      </Dialog>
       <div className="h-full p-4 flex flex-col gap-4 justify-center ">
         <p className="font-alata">
           Welcome to Valediktoria, what room would you like to join?
@@ -104,7 +143,10 @@ export default function Home() {
           </div>
         </div>
         <div className="grid grid-cols-2 items-center w-full gap-4 justify-between">
-          <button className="py-1 w-full rounded-xl text-sm font-montserrat font-semibold hover:bg-third text-first bg-second">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="py-1 w-full rounded-xl text-sm font-montserrat font-semibold hover:bg-third text-first bg-second"
+          >
             Create Room
           </button>
         </div>
