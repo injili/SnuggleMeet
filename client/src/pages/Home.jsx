@@ -13,9 +13,8 @@ export default function Home() {
         <p className="font-alata">
           Welcome to Valediktoria, what room would you like to join?
         </p>
-
-        <div className="flex items-center w-full gap-4 justify-between">
-          <div className="w-full rounded-[15px] bg-second">
+        <div className="grid grid-cols-2 items-center w-full gap-4 justify-between">
+          <div className="w-full rounded-xl bg-second">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
               <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
                 12 participants
@@ -23,9 +22,18 @@ export default function Home() {
               <p className="text-xl text-first font-alata">Room A</p>
             </div>
             <div className="flex justify-between items-center m-4">
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-4 text-first items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="6"
+                  height="6"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <circle cx="12" cy="12" r="12" />
+                </svg>
                 <p className="text-xs py-1 text-first font-medium font-montserrat">
-                  injili, tweet, scale, trees
+                  injili, tweet, scale, trees ...
                 </p>
               </div>
               <button
@@ -38,66 +46,70 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="w-full rounded-[15px] bg-third">
+          <div className="w-full rounded-xl bg-third">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
               <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
                 Full
               </div>
               <p className="text-xl text-first font-alata">Room B</p>
             </div>
-            <div className="flex justify-between items-center m-4">
+            <div className="flex gap-4 items-center text-first m-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="6"
+                height="6"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <circle cx="12" cy="12" r="12" />
+              </svg>
               <p className="text-xs py-1 text-first font-medium font-montserrat">
-                tress, tando, dimple, sweep, ...
+                tress, tando, dimple, sweep ...
               </p>
             </div>
           </div>
-        </div>
-        <div className="flex items-center w-full gap-4 justify-between">
-          <div className="w-full rounded-[15px] bg-second">
+          <div className="w-full rounded-xl bg-second">
             <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
               <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
                 4 participants
               </div>
-              <p className="text-xl text-first font-alata">Kastomaa</p>
+              <p className="text-xl text-first font-alata">Krystal</p>
             </div>
             <div className="flex justify-between items-center m-4">
-              <p className="text-xs py-1 text-first font-medium font-montserrat">
-                injili, tweet, scale, trees
-              </p>
-              <button className="py-1 bg-first rounded-xl text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first">
-                Join
-              </button>
-            </div>
-          </div>
-          <div className="w-full rounded-[15px] bg-second">
-            <div className="flex justify-between items-center m-4 pb-4 border-b border-first">
-              <div className="px-2 py-1 font-montserrat text-xs font-medium rounded-xl bg-first">
-                10 participants
+              <div className="flex gap-4 items-center text-first">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="6"
+                  height="6"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <circle cx="12" cy="12" r="12" />
+                </svg>
+                <p className="text-xs py-1 text-first font-medium font-montserrat">
+                  injili, tweet, scale, trees
+                </p>
               </div>
-              <p className="text-xl text-first font-alata">Kristals</p>
-            </div>
-            <div className="flex justify-between items-center m-4">
-              <p className="text-xs py-1 text-first font-medium font-montserrat">
-                injili, tweet, scale, trees
-              </p>
               <button className="py-1 bg-first rounded-xl text-third text-xs font-montserrat font-medium hover:bg-third px-8 hover:text-first">
                 Join
               </button>
             </div>
           </div>
         </div>
-        <button className="py-1 w-2/6 flex items-center justify-center gap-2 rounded-xl text-sm font-montserrat font-semibold hover:bg-third text-first bg-second">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="8"
-            height="8"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
-          </svg>
-          Create Room
-        </button>
+        <div className="grid grid-cols-2 items-center w-full gap-4 justify-between">
+          <button className="py-1 w-full flex items-center justify-center gap-2 rounded-xl text-sm font-montserrat font-semibold hover:bg-third text-first bg-second">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="8"
+              height="8"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" />
+            </svg>
+            Create Room
+          </button>
+        </div>
       </div>
     </div>
   );

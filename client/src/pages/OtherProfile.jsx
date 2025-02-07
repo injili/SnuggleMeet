@@ -75,7 +75,7 @@ export default function OtherProfile() {
               alt="the valediktoria logo"
               className="rounded-full"
             />
-            <div className=" text-third font-montserrat font-semibold font-medium rounded-full bg-first">
+            <div className=" text-third font-montserrat font-semibold font-medium rounded-xl bg-first">
               {currentUser.displayName
                 ? currentUser.displayName
                 : currentUser.email}
@@ -93,7 +93,7 @@ export default function OtherProfile() {
             </div>
           </div>
 
-          <button className="py-1 px-4 flex items-center justify-center gap-2 bg-first rounded-full text-third text-sm font-montserrat font-semibold hover:bg-third hover:text-first border border-2 border-third">
+          <button className="py-1 px-4 flex items-center justify-center gap-2 bg-first rounded-xl text-third text-sm font-montserrat font-semibold hover:bg-third hover:text-first border border-2 border-third">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -114,7 +114,7 @@ export default function OtherProfile() {
               <div className="font-montserrat text-sm font-semibold text-third ">
                 Bio
               </div>
-              <p className="text-xs text-first px-2 py-1 font-montserrat font-medium bg-second rounded-full">
+              <p className="text-xs text-first px-2 py-1 font-montserrat font-medium bg-second rounded-xl">
                 Pharmacist
               </p>
             </div>
@@ -174,7 +174,7 @@ export default function OtherProfile() {
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Friends
               </p>
-              <p className="bg-second py-1 px-2 font-montserrat text-xs text-first rounded-full">
+              <p className="bg-second py-1 px-2 font-montserrat text-xs text-first rounded-xl">
                 14
               </p>
             </div>
@@ -184,7 +184,7 @@ export default function OtherProfile() {
               <p className="font-montserrat text-sm font-semibold text-third ">
                 Current Room
               </p>
-              <p className="bg-second py-1 px-2 font-montserrat text-xs text-first rounded-full">
+              <p className="bg-second py-1 px-2 font-montserrat text-xs text-first rounded-xl">
                 Powder
               </p>
             </div>
