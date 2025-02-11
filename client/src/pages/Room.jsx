@@ -22,6 +22,7 @@ export default function Room() {
       setRoomId(roomId);
       setToken(token);
       setUid(uid);
+      console.log(token);
       console.log(`Joined room: ${roomId}`);
 
       const agoraClient = AgoraRTC.createClient({

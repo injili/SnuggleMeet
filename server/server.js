@@ -45,10 +45,12 @@ io.on("connection", (socket) => {
     APP_ID,
     APP_CERTIFICATE,
     room.id,
-    uid,
+    String(uid),
     role,
     privilegeExpiresTs
   );
+
+  console.log(`The token: ${token}`);
 
   socket.emit("joined-room", { roomId: room.id, token, uid });
 
