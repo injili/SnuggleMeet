@@ -17,25 +17,13 @@ const io = new Server(server, {
 
 const APP_ID = process.env.APP_ID;
 const APP_CERTIFICATE = process.env.APP_CERTIFICATE;
-const MAX_USERS = 12;
 const PORT = 5000;
-
-let rooms = [{ id: "room-1", users: [] }];
 
 io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
 
-  let room = rooms.find((r) => r.users.length < MAX_USERS);
-
-  if (!room) {
-    room = { id: `room-${rooms.length + 1}`, users: [] };
-    rooms.push(room);
-  }
-
-  room.users.push(socket.id);
-  socket.join(room.id);
-
   const uid = Math.floor(Math.random() * 10000);
+  const room = "Snuggle";
   const role = RtcRole.PUBLISHER;
   const expirationTimeInSeconds = 3600;
   const currentTimeStamp = Math.floor(Date.now() / 1000);
@@ -44,26 +32,17 @@ io.on("connection", (socket) => {
   const token = RtcTokenBuilder.buildTokenWithUid(
     APP_ID,
     APP_CERTIFICATE,
-    room.id,
+    room,
     String(uid),
     role,
     privilegeExpiresTs
   );
 
-  console.log(`The token: ${token}`);
+  console.log(`The token: ${room}`);
 
-  socket.emit("joined-room", { roomId: room.id, token, uid });
+  socket.emit("joined-room", { room, token, uid });
 
-  console.log(`User ${socket.id} joined ${room.id}`);
-
-  socket.on("disconnect", () => {
-    console.log(`User disconnected: ${socket.id}`);
-    room.users = room.users.filter((user) => user !== socket.id);
-
-    if (room.users.length === 0) {
-      rooms = rooms.filter((r) => r.id !== room.id);
-    }
-  });
+  console.log(`User ${socket.id} joined ${room}`);
 });
 
 server.listen(PORT, () => {

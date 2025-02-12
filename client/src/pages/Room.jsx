@@ -1,71 +1,100 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import AgoraRTC from "agora-rtc-sdk-ng";
+import { useNavigate } from "react-router-dom";
 
 const socket = io("ws://localhost:5000", {
   transports: ["websocket"],
 });
 
 export default function Room() {
-  const [roomId, setRoomId] = useState(null);
+  const [roomId, setRoomId] = useState("");
   const [token, setToken] = useState(null);
   const [uid, setUid] = useState(null);
   const [localTracks, setLocalTracks] = useState([]);
-  const [client, setClient] = useState(null);
   const [users, setUsers] = useState([]);
   const [isAudioMuted, setIsAudioMuted] = useState(false);
   const [isVideoMuted, setIsVideoMuted] = useState(false);
   const APP_ID = import.meta.env.VITE_APP_ID;
+  const navigate = useNavigate();
+
+  const handleUserJoined = async (user, mediaType) => {
+    await client.subscribe(user, mediaType);
+
+    if (mediaType == "video") {
+      setUsers((previousUsers) => [...previousUsers, user]);
+    }
+
+    if (mediaType === "audio") {
+      user.audioTrack.play;
+    }
+  };
+
+  const handleUserLeft = (user) => {
+    setUsers((previousUsers) =>
+      previousUsers.filter((u) => u.uid !== user.uid)
+    );
+  };
+
+  const handleLeave = async () => {
+    try {
+      localTracks.forEach((track) => {
+        track.stop();
+        track.close();
+      });
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleJoinedRoom = async ({ roomId, token, uid }) => {
+    setRoomId(roomId);
+    setToken(token);
+    setUid(uid);
+    console.log(
+      `The App ID: ${APP_ID}, the room: ${roomId}, the token: ${token}`
+    );
+  };
+
+  const client = AgoraRTC.createClient({
+    mode: "rtc",
+    codec: "vp8",
+  });
 
   useEffect(() => {
-    const handleJoinedRoom = async ({ roomId, token, uid }) => {
-      setRoomId(roomId);
-      setToken(token);
-      setUid(uid);
-      console.log(token);
-      console.log(`Joined room: ${roomId}`);
-
-      const agoraClient = AgoraRTC.createClient({
-        mode: "rtc",
-        codec: "vp8",
-      });
-
-      await agoraClient.join(APP_ID, roomId, token, uid);
-      setClient(agoraClient);
-
-      const tracks = await AgoraRTC.createMicrophoneAndCameraTracks();
-      setLocalTracks(tracks);
-      await agoraClient.publish(tracks);
-      if (tracks[1]) {
-        tracks[1].play("local-user");
-      } else {
-        console.error("Local video track not found!");
-      }
-
-      console.log("Published local tracks!");
-
-      agoraClient.on("user-published", async (user, mediaType) => {
-        await agoraClient.subscribe(user, mediaType);
-        setUsers((prevUsers) => [...prevUsers, user]);
-
-        if (mediaType === "video") {
-          user.videoTrack.play(`user-${user.uid}`);
-        }
-        if (mediaType === "audio") {
-          user.audioTrack.play();
-        }
-      });
-
-      agoraClient.on("user-unpublished", (user) => {
-        setUsers((prevUsers) => prevUsers.filter((u) => u.uid !== user.uid));
-      });
-    };
     socket.on("joined-room", handleJoinedRoom);
+
+    client.on("user-joined", handleUserJoined);
+    client.on("user-left", handleUserLeft);
+    client
+      .join(APP_ID, roomId, token, null)
+      .then((uid) =>
+        Promise.all([AgoraRTC.createMicrophoneAndCameraTracks(), uid])
+      )
+      .then(([tracks, uid]) => {
+        const [audioTrack, videoTrack] = tracks;
+        setLocalTracks(tracks);
+        setUsers((previousUsers) => [
+          ...previousUsers,
+          {
+            uid,
+            videoTrack,
+          },
+        ]);
+        client.publish(tracks);
+      });
+
     return () => {
+      for (let localTrack of localTracks) {
+        localTrack.stop();
+        localTrack.close();
+      }
       console.log("Cleaning up...");
+      client.off("user-published", handleUserJoined);
+      client.off("user-left", handleUserLeft);
       socket.off("joined-room");
-      client?.leave(); // Leave Agora session
-      localTracks?.forEach((track) => track.stop());
+      client.unpublish(localTracks).then(() => client?.leave());
     };
   }, []);
 
