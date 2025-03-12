@@ -20,31 +20,31 @@ const APP_CERTIFICATE = process.env.APP_CERTIFICATE;
 const PORT = 5000;
 
 io.on("connection", (socket) => {
-  // console.log(`User connected: ${socket.id}`);
+  console.log(`User connected: ${socket.id}`);
 
-  // const uid = Math.floor(Math.random() * 10000);
-  // const room = "Snuggle";
-  // const role = RtcRole.PUBLISHER;
-  // const expirationTimeInSeconds = 3600;
-  // const currentTimeStamp = Math.floor(Date.now() / 1000);
-  // const privilegeExpiresTs = currentTimeStamp + expirationTimeInSeconds;
+  const uid = Math.floor(Math.random() * 10000);
+  const room = "Snuggle";
+  const role = RtcRole.PUBLISHER;
+  const expirationTimeInSeconds = 3600;
+  const currentTimeStamp = Math.floor(Date.now() / 1000);
+  const privilegeExpiresTs = currentTimeStamp + expirationTimeInSeconds;
 
-  // const token = RtcTokenBuilder.buildTokenWithUid(
-  //   APP_ID,
-  //   APP_CERTIFICATE,
-  //   room,
-  //   String(uid),
-  //   role,
-  //   privilegeExpiresTs
-  // );
+  const token = RtcTokenBuilder.buildTokenWithUid(
+    APP_ID,
+    APP_CERTIFICATE,
+    room,
+    String(uid),
+    role,
+    privilegeExpiresTs
+  );
 
-  // console.log(`The token: ${room}`);
+  console.log(`The token: ${room}`);
 
   socket.emit("dummy", "Dummy Text");
 
-  // socket.emit("joined-room", { room, token, uid });
+  socket.emit("joined-room", { room, token, uid });
 
-  // console.log(`User ${socket.id} joined ${room}`);
+  console.log(`User ${socket.id} joined ${room}`);
   socket.on("disconnect", () => {
     console.log("a client disconnected");
   });
