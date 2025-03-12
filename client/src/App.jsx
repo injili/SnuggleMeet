@@ -12,6 +12,7 @@ import OtherProfile from "./pages/OtherProfile";
 import Authprovider from "./api/authprovider";
 import Verification from "./pages/Verification";
 import Verified from "./pages/Verified";
+import Dummy from "./pages/Dummy";
 
 const Layout = () => {
   return (
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "/room",
         element: <Room />,
+      },
+      {
+        path: "/dummy",
+        element: <Dummy />,
       },
     ],
   },
